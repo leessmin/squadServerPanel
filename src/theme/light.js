@@ -17,6 +17,16 @@ export const light = new Map([
         "#f1f1f1"
     ],
     [
+        // 表格头的颜色
+        "--table-header-bg",
+        "#fafafa"
+    ],
+    [
+        // 表格body的颜色
+        "--table-body-bg",
+        "##fafafa"
+    ],
+    [
         // 主文本色
         "--text-color",
         "#000"

@@ -1,7 +1,7 @@
 <template>
     <main>
         <!-- 面板信息 -->
-        <section class="panel-info">
+        <SectionPanel class="panel-info mt-zero">
             <div class="left">
                 <div class="img-box">
                     <img src="/squad_logo.png" alt="">
@@ -11,17 +11,17 @@
                 <h1>Squad服务器管理面板</h1>
             </div>
             <div class="right">
-                <a-badge dot :offset="[-12,10]">
+                <a-badge dot :offset="[-12, 10]">
                     <a-button type="link">更新</a-button>
                 </a-badge>
                 <a-button type="link">修复</a-button>
                 <a-button type="link">重启</a-button>
                 <a-button type="link">关于</a-button>
             </div>
-        </section>
+        </SectionPanel>
 
         <!-- 系统运行状态 -->
-        <section class="system-info">
+        <SectionPanel class="system-info">
             <div class="title-box">
                 <h3>状态</h3>
             </div>
@@ -62,10 +62,10 @@
                     </div>
                 </li>
             </ul>
-        </section>
+        </SectionPanel>
 
         <!-- 流量监控 -->
-        <section class="flow-monitor">
+        <SectionPanel class="flow-monitor">
             <div class="title-box">
                 <h3>流量</h3>
             </div>
@@ -109,17 +109,18 @@
             </div>
             <div class="chart-box">
                 <StackedAreaChart :thenTime="flowMonitorInfo.thenTime" :downloadSpeed="flowMonitorInfo.downloadSpeed"
-                                  :uploadSpeed="flowMonitorInfo.uploadSeed"></StackedAreaChart>
+                    :uploadSpeed="flowMonitorInfo.uploadSeed"></StackedAreaChart>
             </div>
-        </section>
+        </SectionPanel>
     </main>
 </template>
 
 <script setup>
 import StatusChart from "../../../components/StatusChart.vue";
-import {reactive} from "vue";
+import { reactive } from "vue";
 import StackedAreaChart from "../../../components/StackedAreaChart.vue";
 import dayjs from "dayjs";
+import SectionPanel from "../../../components/SectionPanel.vue";
 
 
 // 系统运行状态
@@ -180,31 +181,19 @@ main {
         margin: 0;
     }
 
-    section {
-        width: 95%;
-        padding: 10px;
+    .title-box {
+        height: 40px;
+        padding-left: 10px;
+        border-bottom: 1px solid var(--border-color-base);
+        line-height: 40px;
+        padding-bottom: 10px;
         box-sizing: content-box;
-        background-color: var(--component-background);
-        border-radius: 4px;
-        margin: 20px auto 0;
 
-        &:first-child {
-            margin-top: 0;
-        }
-
-        .title-box {
-            height: 40px;
-            padding-left: 10px;
-            border-bottom: 1px solid var(--border-color-base);
-            line-height: 40px;
-            padding-bottom: 10px;
-            box-sizing: content-box;
-
-            h3 {
-                font-weight: bold;
-            }
+        h3 {
+            font-weight: bold;
         }
     }
+
 
     // 面板信息
     .panel-info {

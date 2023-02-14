@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 
 const routes = [
@@ -9,14 +9,16 @@ const routes = [
         component: () => import("./Index/Index.vue"),
         children: [
             {
+                // 首页
                 path: "home",
                 name: "home",
-                component:()=> import("./Index/home/Home.vue"),
+                component: () => import("./Index/home/Home.vue"),
             },
             {
+                // 添加管理组
                 path: "adminGroup",
                 name: "adminGroup",
-                component:()=> import("./Index/home/Home.vue"),
+                component: () => import("./Index/adminGroup/AdminGroup.vue"),
             },
         ]
     }

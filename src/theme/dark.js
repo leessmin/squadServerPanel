@@ -17,6 +17,16 @@ export const dark = new Map([
         "#626262"
     ],
     [
+        // 表格头的颜色
+        "--table-header-bg",
+        "#9c9c9c"
+    ],
+    [
+        // 表格body的颜色
+        "--table-body-bg",
+        "#8c8c8c"
+    ],
+    [
         // 主文本色
         "--text-color",
         "#fff"
@@ -34,6 +44,6 @@ export const dark = new Map([
     [
         // 边框色
         "--border-color-base",
-        "#e8e8e8"
+        "#5e5e5e"
     ]
 ])

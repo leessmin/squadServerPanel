@@ -4,7 +4,12 @@ body {
     min-width: 1200px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--heading-color) !important;
     user-select: none;
 }
@@ -17,6 +22,59 @@ html {
     overflow-y: overlay;
 }
 
-ul{
+ul {
     list-style: none;
 }
+
+/* margin-top: 0; */
+.mt-zero {
+    margin-top: 0;
+}
+
+
+
+
+
+/*
+* ant 组件的样式
+*/
+
+
+/* table相关 :start */
+/* table 表头 的颜色 */
+.ant-table-thead .ant-table-cell {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color);
+}
+
+/* table 表body 的颜色 */
+.ant-table-tbody .ant-table-cell {
+    background-color: var(--table-body-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color);
+}
+
+.ant-table-content table {
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-table-container {
+    border-color: var(--border-color-base) !important;
+}
+
+/* table相关 :end */
+
+
+
+/* Popconfirm 气泡确认框 :start */
+
+.ant-popover-inner-content {
+    background-color: var(--component-background);
+}
+
+.ant-popover-message-title {
+    color: var(--text-color);
+}
+
+/* Popconfirm 气泡确认框 :end */
