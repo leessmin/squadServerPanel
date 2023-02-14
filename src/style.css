@@ -1,0 +1,22 @@
+body {
+    background-color: var(--body-background) !important;
+    color: var(--text-color) !important;
+    min-width: 1200px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color) !important;
+    user-select: none;
+}
+
+p {
+    color: var(--text-color);
+}
+
+html {
+    overflow-y: overlay;
+}
+
+ul{
+    list-style: none;
+}
