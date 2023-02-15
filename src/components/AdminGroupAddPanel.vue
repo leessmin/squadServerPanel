@@ -10,6 +10,10 @@
                     <a-input v-model:value="formState.groupName" />
                 </a-form-item>
 
+                <a-form-item label="备注" name="info">
+                    <a-input v-model:value="formState.info" />
+                </a-form-item>
+
                 <div class="form-gutter">
                     <h3>权限：</h3>
                     <a-row :gutter="16">
@@ -192,6 +196,8 @@ let groupNameStatus = reactive({
 const formState = reactive({
     // 组名
     groupName: '',
+    // 备注
+    info: '',
     // 更换/预设地图
     changemap: false,
     // 暂停游戏
@@ -264,6 +270,7 @@ const okHandle = e => {
     let tempObj = {
         key: props.keyValue,
         groupName: formState.groupName,
+        info: formState.info,
         auth: [],
     }
 
@@ -271,7 +278,7 @@ const okHandle = e => {
     for (const k in formState) {
 
         // 如果key等于groupName则跳过这次循环
-        if (k === "groupName") {
+        if (k === "groupName" || k === "info") {
             continue
         }
 
@@ -306,7 +313,7 @@ watch(props, (value) => {
     // 初始化表单数据
     for (const k in formState) {
         // 如果key等于groupName则跳过这次循环
-        if (k === "groupName") {
+        if (k === "groupName" || k === 'info') {
             formState[k] = ""
         }
 
@@ -325,6 +332,7 @@ watch(props, (value) => {
 
     // 添加项目组名
     formState.groupName = value.editObj.groupName
+    formState.info = value.editObj.info
 
     // 遍历 已经添加的权限
     value.editObj.auth.forEach((value) => {

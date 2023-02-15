@@ -1,5 +1,5 @@
 <template>
-    <!-- 管理组 -->
+    <!-- 添加 管理组 -->
     <main>
         <SectionPanel class="mt-zero">
             <div class="title-box">
@@ -8,13 +8,19 @@
             <div class="btn-box">
                 <a-button type="primary" class="editable-add-btn" @click="addHandle">添加</a-button>
             </div>
-            <a-table bordered :data-source="dataSource" :columns="columns" :pagination="false">
+            <a-table bordered :data-source="dataSource" :columns="columns" :pagination="false" :scroll="{ x: 1000 }">
                 <template #bodyCell="{ column, text, record }">
-                    <template v-if="column.dataIndex === 'auth'">
+                    <template v-if="column.dataIndex === 'info'">
+                        <span :style="{ color: isNull(record.info) ? 'var(--heading-color)' : 'var(--text-color)' }">{{
+                            isNull(record.info) ?'无备注':
+                                record.info
+                        }}</span>
+                    </template>
+                    <template v-else-if="column.dataIndex === 'auth'">
                         <span>
                             <a-tag v-for="auth in record.auth" :key="auth" :color="groupAuthMap.get(auth).color"
-                                style="margin-bottom: 4px;">
-                                <span style="color: var(--text-color);">
+                                style="margin-bottom: 8px; font-size: large;">
+                                <span style="color: #fff;">
                                     {{ groupAuthMap.get(auth).title }}
                                 </span>
                             </a-tag>
@@ -52,17 +58,23 @@ const columns = [
     {
         title: '组名',
         dataIndex: 'groupName',
-        width: 100,
+        width: "150px",
+        fixed: 'left',
+    },
+    {
+        title: '备注',
+        dataIndex: 'info',
+        watch: 150,
     },
     {
         title: '权限',
         dataIndex: 'auth',
-        width: 700,
+        width: 1100,
     },
     {
         title: '操作',
         dataIndex: 'operation',
-        width: 100,
+        width: 200,
     }
 ];
 
@@ -71,6 +83,7 @@ const dataSource = ref([
     {
         key: '0',
         groupName: 'admin',
+        info: "管理员",
         auth: ["forceteamchange", "canseeadminchat"],
     },
 ]);
@@ -109,14 +122,14 @@ const groupAuthMap = new Map([
         "balance",
         {
             title: "忽略服务器阵营平衡",
-            color: "#7bed9f"
+            color: "#69c987"
         }
     ],
     [
         "chat",
         {
             title: "管理员聊天/服务器公告",
-            color: "#ffeaa7"
+            color: "#c9b984"
         }
     ],
     [

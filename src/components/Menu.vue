@@ -34,7 +34,7 @@
                     </template>
                     添加管理组
                 </a-menu-item>
-                <a-menu-item key="addAdminUser">
+                <a-menu-item key="adminUser">
                     <template #icon>
                         <user-add-outlined/>
                     </template>

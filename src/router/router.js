@@ -20,6 +20,12 @@ const routes = [
                 name: "adminGroup",
                 component: () => import("./Index/adminGroup/AdminGroup.vue"),
             },
+            {
+                // 添加管理员
+                path: "adminUser",
+                name: "adminUser",
+                component: () => import("./Index/adminUser/AdminUser.vue"),
+            },
         ]
     }
 ]

@@ -1,7 +1,7 @@
 body {
     background-color: var(--body-background) !important;
     color: var(--text-color) !important;
-    min-width: 1200px;
+    min-width: 1600px;
 }
 
 h1,
@@ -81,6 +81,50 @@ section .title-box h3 {
 
 .ant-table-container {
     border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link svg,
+.ant-pagination-next .ant-pagination-item-link svg {
+    fill: var(--text-color);
+}
+
+.ant-pagination-item {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-item a {
+    color: var(--text-color) !important;
+}
+
+.ant-pagination-item-ellipsis {
+    color: var(--text-color) !important;
+}
+
+.ant-select-selector {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color) !important;
+}
+
+.ant-select-arrow svg {
+    fill: var(--text-color);
+}
+
+.ant-select-dropdown {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color) !important;
+}
+
+.ant-select-dropdown .ant-select-item{
+    color: var(--heading-color) !important;
 }
 
 /* table相关 :end */
