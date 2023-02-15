@@ -19,7 +19,7 @@
                     <template v-else-if="column.dataIndex === 'auth'">
                         <span>
                             <a-tag v-for="auth in record.auth" :key="auth" :color="groupAuthMap.get(auth).color"
-                                style="margin-bottom: 8px; font-size: large;">
+                                style="margin-bottom: 8px; font-size: medium;">
                                 <span style="color: #fff;">
                                     {{ groupAuthMap.get(auth).title }}
                                 </span>

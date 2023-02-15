@@ -123,8 +123,16 @@ section .title-box h3 {
     color: var(--text-color) !important;
 }
 
-.ant-select-dropdown .ant-select-item{
+.ant-select-dropdown .ant-select-item {
     color: var(--heading-color) !important;
+}
+
+.ant-pagination-item-active{
+    background-color: var(--ant-primary-color) !important;
+}
+
+.ant-pagination-total-text{
+    color: var(--text-color) !important;
 }
 
 /* table相关 :end */

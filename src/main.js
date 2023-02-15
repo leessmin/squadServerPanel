@@ -11,8 +11,6 @@ import Antd from 'ant-design-vue';
 // import 'ant-design-vue/dist/antd.css';
 import 'ant-design-vue/dist/antd.variable.min.css'
 
-// 引入default-passive-events
-import 'default-passive-events';
 
 
 createApp(App).use(pinia).use(router).use(Antd).mount('#app')
