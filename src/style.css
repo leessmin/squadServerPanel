@@ -28,8 +28,28 @@ ul {
 
 /* margin-top: 0; */
 .mt-zero {
-    margin-top: 0;
+    margin-top: 0 !important;
 }
+
+main {
+    padding: 20px;
+}
+
+section .title-box {
+    height: 40px;
+    padding-left: 10px;
+    border-bottom: 1px solid var(--border-color-base);
+    line-height: 40px;
+    padding-bottom: 10px;
+    box-sizing: content-box;
+
+
+}
+
+section .title-box h3 {
+    font-weight: bold;
+}
+
 
 
 
@@ -78,3 +98,45 @@ ul {
 }
 
 /* Popconfirm 气泡确认框 :end */
+
+
+/* 弹出框 :start */
+
+.ant-modal-content {
+    background-color: var(--component-background) !important;
+}
+
+.ant-modal-header {
+    background-color: var(--component-background) !important;
+}
+
+.ant-modal-title {
+    color: var(--heading-color) !important;
+}
+
+.ant-modal-close-icon svg {
+    fill: var(--text-color);
+}
+
+/* 弹出框 :end */
+
+
+/* 表单 :start */
+
+.ant-form-item-required {
+    color: var(--text-color) !important;
+}
+
+.ant-form-item-label label {
+    color: var(--text-color) !important;
+}
+
+.ant-checkbox-wrapper-checked span {
+    color: var(--text-color) !important;
+}
+
+.ant-checkbox-wrapper span {
+    color: var(--text-color) !important;
+}
+
+/* 表单 :end */
