@@ -64,17 +64,18 @@ const columns = [
     {
         title: '备注',
         dataIndex: 'info',
-        watch: 150,
+        // watch: 150,
     },
     {
         title: '权限',
         dataIndex: 'auth',
-        width: 900,
+        // width: 900,
     },
     {
         title: '操作',
         dataIndex: 'operation',
-        width: 200,
+        // width: 200,
+        fixed: 'right',
     }
 ];
 

@@ -215,6 +215,7 @@ main {
             h1 {
                 font-weight: bold;
                 margin: 0;
+                font-size: 1.5rem;
             }
         }
     }

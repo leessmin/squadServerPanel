@@ -1,7 +1,7 @@
 body {
     background-color: var(--body-background) !important;
     color: var(--text-color) !important;
-    min-width: 1600px;
+    /* min-width: 1200px; */
 }
 
 h1,
@@ -219,6 +219,22 @@ section .title-box h3 {
 }
 
 /* btn :end */
+
+
+
+/* 布局 :start */
+
+.ant-layout{
+    background-color: var(--body-background) !important;
+}
+
+.ant-layout-footer{
+    background-color: var(--body-background) !important;
+    border-top: 1px solid var(--border-color-base);
+    color: var(--text-color-secondary) !important;
+}
+
+/* 布局 :end */
 
 
 

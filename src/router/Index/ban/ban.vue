@@ -118,6 +118,7 @@ const columns = [
         title: 'steam昵称',
         dataIndex: 'steamName',
         width: '25%',
+        fixed: 'left',
         // 配置可搜索
         customFilterDropdown: true,
         onFilter: (value, record) => record.steamName.toString().toLowerCase().includes(value.toLowerCase()),
@@ -146,6 +147,7 @@ const columns = [
     {
         title: '操作',
         dataIndex: 'operation',
+        fixed: 'right',
     }
 ];
 

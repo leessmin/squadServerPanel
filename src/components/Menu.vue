@@ -12,7 +12,7 @@
         <a-menu
                 v-model:openKeys="state.openKeys"
                 v-model:selectedKeys="state.selectedKeys"
-                style="width: 180px; height: calc(100% - 50px)"
+                style="height: calc(100% - 50px)"
                 mode="inline"
                 :theme="state.theme"
                 @select="selectHandle"

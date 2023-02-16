@@ -24,7 +24,7 @@ export const light = new Map([
     [
         // 表格body的颜色
         "--table-body-bg",
-        "##fafafa"
+        "#fafafa"
     ],
     [
         // 主文本色

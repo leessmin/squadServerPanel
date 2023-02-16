@@ -135,7 +135,8 @@ const columns = [
     {
         title: 'steam昵称',
         dataIndex: 'steamName',
-        width: '25%',
+        width: '20%',
+        fixed: 'left',
         // 配置可搜索
         customFilterDropdown: true,
         onFilter: (value, record) => record.steamName.toString().toLowerCase().includes(value.toLowerCase()),
@@ -150,12 +151,12 @@ const columns = [
     {
         title: 'steamID',
         dataIndex: 'steamID',
-        width: '25%',
+        width: '30%',
     },
     {
         title: '管理组',
         dataIndex: 'adminGroup',
-        width: '20%',
+        width: '30%',
         filters: [
             {
                 text: 'admin',
@@ -176,6 +177,8 @@ const columns = [
     {
         title: '操作',
         dataIndex: 'operation',
+        width: '20%',
+        fixed: 'right',
     }
 ];
 

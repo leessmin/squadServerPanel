@@ -1,15 +1,18 @@
 <template>
     <!--  控制面板 index页面  -->
-    <a-row type="flex">
-        <a-col class="index-menu" flex="180px" style="height: 100vh;">
 
+    <a-layout>
+        <a-layout-sider class="index-menu">
             <Menu></Menu>
-
-        </a-col>
-        <a-col flex="auto">
-            <router-view></router-view>
-        </a-col>
-    </a-row>
+        </a-layout-sider>
+        <a-layout>
+            <!-- <a-layout-header>Header</a-layout-header> -->
+            <a-layout-content>
+                <router-view></router-view>
+            </a-layout-content>
+            <a-layout-footer>Footer</a-layout-footer>
+        </a-layout>
+    </a-layout>
 </template>
 
 <script setup>
@@ -23,7 +26,8 @@ main {
 }
 
 .index-menu {
-        position: sticky;
-        top: 0;
-    }
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
 </style>
