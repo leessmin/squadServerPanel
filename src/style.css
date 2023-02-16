@@ -219,3 +219,11 @@ section .title-box h3 {
 }
 
 /* btn :end */
+
+
+
+/* 解决table不换行问题 */
+.ant-table-wrapper {
+    word-break: break-all;
+    word-wrap: break-word;
+}

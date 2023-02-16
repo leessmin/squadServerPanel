@@ -23,6 +23,7 @@
 
             <div class="table">
                 <a-table :columns="columns" :data-source="dataSource" bordered :pagination="pagination"
+                    :scroll="{ x: 1000 }"
                     :row-selection="{ selectedRowKeys: deleteSelect.selectedRowKeys, onChange: onSelectChange }"
                     @change="changePagination">
 
@@ -57,7 +58,7 @@
                                 <a-input v-if="editableData[record.key]"
                                     v-model:value="editableData[record.key][column.dataIndex]" style="margin: -5px 0" />
                                 <template v-else>
-                                    {{ text }}
+                                    <div>{{ text }}</div>
                                 </template>
                             </div>
                         </template>
