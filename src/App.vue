@@ -1,10 +1,21 @@
 <template>
-    <router-view></router-view>
+    <a-config-provider :locale="locale">
+        <router-view></router-view>
+    </a-config-provider>
 </template>
 
 <script setup>
-import {setPropertyTheme} from "./hooks/setPropertyTheme.js";
-import {useThemeStore} from "./store/useThemeStore.js";
+import { setPropertyTheme } from "./hooks/setPropertyTheme.js";
+import { useThemeStore } from "./store/useThemeStore.js";
+import 'dayjs/locale/zh-cn';
+import locale from 'ant-design-vue/lib/locale-provider/zh_CN';
+
+
+
+
+
+
+
 
 // 实例化主题仓库
 const themeStore = useThemeStore()
@@ -21,7 +32,7 @@ const themeStore = useThemeStore()
 setPropertyTheme(themeStore.isTheme)
 
 // 订阅主题仓库
-themeStore.$subscribe((mutation, state)=>{
+themeStore.$subscribe((mutation, state) => {
     // 改变主题
     setPropertyTheme(state.isTheme)
 })

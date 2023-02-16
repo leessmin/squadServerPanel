@@ -62,7 +62,10 @@
                             </div>
                         </template>
                         <template v-else-if="column.dataIndex === 'banTime'">
-                            <div>
+                            <a-date-picker v-if="editableData[record.key]"
+                                v-model:value="editableData[record.key][column.dataIndex]" show-time
+                                placeholder="选择封禁结束时间" />
+                            <div v-else>
                                 {{ dayjs(parseInt(record.banTime) * 1000).format('YYYY-MM-DD HH:mm:ss') }}
                             </div>
                         </template>
@@ -194,17 +197,26 @@ watch(dataSource.value, (value) => {
 // 编辑
 const edit = key => {
     editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0]);
+
+    // 转成日期对象
+    editableData[key].banTime = dayjs(editableData[key].banTime * 1000)
 };
 
 // 保存
 const save = key => {
     // 保存之前判断是否填写完毕
     let temp = editableData[key]
-    if (isNull(temp.steamID)) {
+
+    if (isNull(temp.steamID) || isNull(temp.cause) || isNull(temp.banTime)) {
         message.warning('信息填写不完整');
 
         return
     }
+
+    // 处理时间 将时间对象转换成unix时间戳
+    temp.banTime = dayjs(temp.banTime).unix()
+
+    console.log(temp.banTime);
 
     Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
     delete editableData[key];
@@ -250,7 +262,8 @@ function addHandle() {
         key: index,
         steamName: ``,
         steamID: '',
-        cause: ''
+        cause: '',
+        banTime: null,
     }
 
 

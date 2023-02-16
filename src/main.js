@@ -4,7 +4,7 @@ import './style.css'
 
 import router from "./router/router.js";
 
-import {createPinia} from "pinia";
+import { createPinia } from "pinia";
 const pinia = createPinia()
 
 import Antd from 'ant-design-vue';
