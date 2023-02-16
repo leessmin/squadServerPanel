@@ -7,12 +7,44 @@
             </div>
 
             <div class="btn-box">
+                <div style="margin-right: 10px;">
+                    <a-button type="primary" danger :disabled="!hasSelected" :loading="deleteSelect.loading"
+                        @click="deleteArr">
+                        删除
+                    </a-button>
+                    <span style="margin-left: 8px">
+                        <template v-if="hasSelected">
+                            {{ `选中 ${deleteSelect.selectedRowKeys.length} 行` }}
+                        </template>
+                    </span>
+                </div>
                 <a-button type="primary" class="editable-add-btn" @click="addHandle">添加</a-button>
             </div>
 
             <div class="table">
                 <a-table :columns="columns" :data-source="dataSource" bordered :pagination="pagination"
+                    :row-selection="{ selectedRowKeys: deleteSelect.selectedRowKeys, onChange: onSelectChange }"
                     @change="changePagination">
+
+                    <template #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
+                        <div style="padding: 8px">
+                            <a-input ref="searchInput" :placeholder="`搜索 ${column.title}`" :value="selectedKeys[0]"
+                                style="width: 188px; margin-bottom: 8px; display: block"
+                                @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+                                @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)" />
+                            <a-button type="primary" size="small" style="width: 90px; margin-right: 8px"
+                                @click="handleSearch(selectedKeys, confirm, column.dataIndex)">
+                                <template #icon>
+                                    <SearchOutlined />
+                                </template>
+                                搜索
+                            </a-button>
+                            <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
+                                重置
+                            </a-button>
+                        </div>
+                    </template>
+
                     <template #bodyCell="{ column, text, record }">
                         <template v-if="column.dataIndex === 'steamName'">
                             <div
@@ -71,9 +103,11 @@
 <script setup>
 import SectionPanel from '../../../components/SectionPanel.vue';
 import { cloneDeep } from 'lodash-es';
-import { reactive, ref, onMounted } from 'vue';
+import { reactive, ref, computed, watch } from 'vue';
 import { isNull } from '../../../hooks/isNull';
 import { message } from 'ant-design-vue';
+import { useSteamStore } from '../../../store/useSteamStore';
+import { SearchOutlined } from '@ant-design/icons-vue';
 
 
 
@@ -95,11 +129,23 @@ const selectOptions = ref([
 ]);
 
 
+
+// 表格配置
 const columns = [
     {
         title: 'steam昵称',
         dataIndex: 'steamName',
         width: '25%',
+        // 配置可搜索
+        customFilterDropdown: true,
+        onFilter: (value, record) => record.steamName.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: visible => {
+            if (visible) {
+                setTimeout(() => {
+                    searchInput.value.focus();
+                }, 100);
+            }
+        },
     },
     {
         title: 'steamID',
@@ -110,27 +156,68 @@ const columns = [
         title: '管理组',
         dataIndex: 'adminGroup',
         width: '20%',
+        filters: [
+            {
+                text: 'admin',
+                value: 'admin',
+            },
+            {
+                text: 'root',
+                value: 'root',
+            },
+            {
+                text: 'VIP',
+                value: 'VIP',
+            }
+        ],
+        // 过滤管理组 处理函数
+        onFilter: (value, record) => record.adminGroup === value,
     },
     {
         title: '操作',
         dataIndex: 'operation',
     }
 ];
-const data = [];
-for (let i = 0; i < 100; i++) {
-    data.push({
-        key: i.toString(),
-        steamName: `Edrward ${i}`,
-        steamID: 32215456457686875689,
+
+const data = [
+    {
+        key: '1',
+        steamName: ``,
+        steamID: "76561199182276910",
         adminGroup: `admin`,
-    });
-}
+    },
+    {
+        key: '2',
+        steamName: ``,
+        steamID: "76561199182276917",
+        adminGroup: `root`,
+    },
+    {
+        key: '3',
+        steamName: ``,
+        steamID: "76561198816965856",
+        adminGroup: `admin`,
+    }
+];
+
 
 
 // 数据源
-const dataSource = ref(data);
+const dataSource = ref(data)
 // 编辑的数据
-const editableData = reactive({});
+const editableData = reactive({})
+
+// 实例化steam仓库
+const steamStore = useSteamStore()
+
+
+
+// 监听数据源
+watch(dataSource.value, (value) => {
+    // 发送请求 拿到用户名
+    getSteamName()
+})
+
 
 
 
@@ -192,7 +279,7 @@ function addHandle() {
     editableData[index] = {
         key: index,
         steamName: ``,
-        steamID: null,
+        steamID: '',
         adminGroup: ``,
     }
 
@@ -203,6 +290,63 @@ function addHandle() {
 
     // 跳转至最后一页
     pagination.current = Math.ceil(dataSource.value.length / pagination.defaultPageSize)
+}
+
+
+
+// 通过 steamName 搜索列表
+// 搜索框的内容
+const searchInput = ref();
+
+// 搜索
+const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+};
+
+// 重置搜索
+const handleReset = clearFilters => {
+    clearFilters({
+        confirm: true,
+    });
+};
+
+
+
+// 批量选择
+const deleteSelect = reactive({
+    selectedRowKeys: [],
+    // Check here to configure the default column
+    loading: false,
+})
+
+// 选中的行数
+const hasSelected = computed(() => deleteSelect.selectedRowKeys.length > 0);
+
+// 选中的行
+const onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    deleteSelect.selectedRowKeys = selectedRowKeys;
+};
+
+// 批量删除回调
+function deleteArr() {
+    deleteSelect.loading = true;
+    // TODO: 发送请求
+
+    console.log(deleteSelect.selectedRowKeys);
+
+    setTimeout(() => {
+        deleteSelect.loading = false;
+
+        // 删除
+        for (let i = 0; i < deleteSelect.selectedRowKeys.length; i++) {
+            dataSource.value = dataSource.value.filter((value) => {
+                return deleteSelect.selectedRowKeys[i] !== value.key
+            })
+        }
+
+        deleteSelect.selectedRowKeys = [];
+    }, 1000);
 }
 
 
@@ -221,6 +365,17 @@ function changePagination({ current }) {
     pagination.current = current
 }
 
+
+
+// 发送请求 拿到用户名
+async function getSteamName() {
+    // 发送请求 拿到用户名
+    dataSource.value.forEach(async (value, index) => {
+        dataSource.value[index].steamName = await steamStore.getSteamName(value.steamID)
+    })
+}
+// 初次加载页面，执行一次
+getSteamName()
 </script>
 
 <style lang="less" scoped>
@@ -229,7 +384,7 @@ main {
     .btn-box {
         width: 100%;
         display: flex;
-        justify-content: right;
+        justify-content: space-between;
         margin: 10px 0;
     }
 }

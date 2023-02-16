@@ -45,5 +45,10 @@ export const dark = new Map([
         // 边框色
         "--border-color-base",
         "#5e5e5e"
+    ],
+    [
+        // 按钮 disabled 颜色
+        "--disabled-bg",
+        "#bdbdbd"
     ]
 ])

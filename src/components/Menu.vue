@@ -27,7 +27,7 @@
                 <template #icon>
                     <solution-outlined/>
                 </template>
-                <template #title>管理员</template>
+                <template #title>管理</template>
                 <a-menu-item key="adminGroup">
                     <template #icon>
                         <usergroup-add-outlined/>

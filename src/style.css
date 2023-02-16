@@ -127,12 +127,24 @@ section .title-box h3 {
     color: var(--heading-color) !important;
 }
 
-.ant-pagination-item-active{
+.ant-pagination-item-active {
     background-color: var(--ant-primary-color) !important;
 }
 
-.ant-pagination-total-text{
+.ant-pagination-total-text {
     color: var(--text-color) !important;
+}
+
+.ant-table-filter-dropdown {
+    background-color: var(--component-background) !important;
+}
+
+.ant-dropdown-menu {
+    background-color: var(--component-background) !important;
+}
+
+.ant-dropdown-menu-title-content span {
+    color: var(--heading-color) !important;
 }
 
 /* table相关 :end */
@@ -192,3 +204,18 @@ section .title-box h3 {
 }
 
 /* 表单 :end */
+
+
+/* btn :start */
+
+.ant-btn-dangerous.ant-btn-primary[disabled] {
+    background-color: var(--disabled-bg) !important;
+    border-color: var(--border-color-base) !important;
+
+}
+
+.ant-btn-dangerous.ant-btn-primary[disabled] span {
+    color: var(--text-color-secondary) !important;
+}
+
+/* btn :end */
