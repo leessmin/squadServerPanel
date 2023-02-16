@@ -96,7 +96,6 @@
                 </a-table>
             </div>
         </SectionPanel>
-
     </main>
 </template>
 

@@ -26,6 +26,12 @@ const routes = [
                 name: "adminUser",
                 component: () => import("./Index/adminUser/AdminUser.vue"),
             },
+            {
+                // 封禁
+                path: "ban",
+                name: "ban",
+                component: () => import("./Index/ban/ban.vue"),
+            },
         ]
     }
 ]
