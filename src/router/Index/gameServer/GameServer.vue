@@ -6,9 +6,7 @@
         </SectionPanel>
 
         <SectionPanel>
-            <div class="title-box">
-                <h3>游戏服务设置</h3>
-            </div>
+            <router-view></router-view>
         </SectionPanel>
     </main>
 </template>

@@ -1,7 +1,7 @@
 body {
     background-color: var(--body-background) !important;
     color: var(--text-color) !important;
-    /* min-width: 1200px; */
+    min-width: 1200px;
 }
 
 h1,

@@ -37,6 +37,14 @@ const routes = [
                 path: "gameServer",
                 name: "gameServer",
                 component: () => import("./Index/gameServer/GameServer.vue"),
+                children: [
+                    {
+                        // 常规配置
+                        path: "GSNormal",
+                        name: "GSNormal",
+                        component: () => import("./Index/gameServer/GSNormal/GSNormal.vue")
+                    }
+                ],
             },
         ]
     }
