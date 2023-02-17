@@ -7,6 +7,8 @@ const routes = [
         path: "/",
         name: "index",
         component: () => import("./Index/Index.vue"),
+        // 重定向
+        redirect: { name: 'home' },
         children: [
             {
                 // 首页
@@ -37,6 +39,8 @@ const routes = [
                 path: "gameServer",
                 name: "gameServer",
                 component: () => import("./Index/gameServer/GameServer.vue"),
+                // 重定向
+                redirect: { name: 'GSNormal' },
                 children: [
                     {
                         // 常规配置
