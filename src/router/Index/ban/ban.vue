@@ -18,7 +18,9 @@
                         </template>
                     </span>
                 </div>
-                <a-button type="primary" class="editable-add-btn" @click="addHandle">添加</a-button>
+                <a-tooltip placement="topLeft" title="当封禁时间为空时，将永久封禁">
+                    <a-button type="primary" class="editable-add-btn" @click="addHandle">添加</a-button>
+                </a-tooltip>
             </div>
 
             <div class="table">
@@ -66,7 +68,10 @@
                                 v-model:value="editableData[record.key][column.dataIndex]" show-time
                                 placeholder="选择封禁结束时间" />
                             <div v-else>
-                                {{ dayjs(parseInt(record.banTime) * 1000).format('YYYY-MM-DD HH:mm:ss') }}
+                                {{
+                                    isNull(record.banTime) ?'永久封禁': dayjs(parseInt(record.banTime) *
+                                        1000).format('YYYY-MM-DD HH:mm:ss')
+                                }}
                             </div>
                         </template>
                         <template v-else-if="column.dataIndex === 'operation'">
@@ -143,6 +148,9 @@ const columns = [
     {
         title: '封禁时间',
         dataIndex: 'banTime',
+        // 排序
+        defaultSortOrder: 'descend',
+        sorter: (a, b) => a.banTime - b.banTime,
     },
     {
         title: '操作',
@@ -164,14 +172,14 @@ const data = [
         steamName: ``,
         steamID: "76561199182276911",
         cause: `开外挂`,
-        banTime: '1676548887',
+        banTime: '1676548899',
     },
     {
         key: '3',
         steamName: ``,
         steamID: "76561199182276915",
         cause: `恶意损坏载具`,
-        banTime: '1676548887',
+        banTime: null,
     }
 ];
 
@@ -209,17 +217,24 @@ const save = key => {
     // 保存之前判断是否填写完毕
     let temp = editableData[key]
 
-    if (isNull(temp.steamID) || isNull(temp.cause) || isNull(temp.banTime)) {
+    if (isNull(temp.steamID) || isNull(temp.cause)) {
         message.warning('信息填写不完整');
 
         return
     }
 
-    // 处理时间 将时间对象转换成unix时间戳
-    temp.banTime = dayjs(temp.banTime).unix()
-
+    if (isNull(temp.banTime)) {
+        // 不填写时间，时间将为0代表永久封禁
+        temp.banTime = null
+    } else {
+        // 处理时间 将时间对象转换成unix时间戳
+        temp.banTime = dayjs(temp.banTime).unix()
+    }
     console.log(temp.banTime);
 
+
+
+    // 保存至 原始数据
     Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
     delete editableData[key];
 };

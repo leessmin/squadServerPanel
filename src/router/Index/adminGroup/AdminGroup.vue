@@ -8,7 +8,7 @@
             <div class="btn-box">
                 <a-button type="primary" class="editable-add-btn" @click="addHandle">添加</a-button>
             </div>
-            <a-table bordered :data-source="dataSource" :columns="columns" :pagination="false" :scroll="{ x: 800 }">
+            <a-table bordered :data-source="dataSource" :columns="columns" :pagination="false" :scroll="{ x: 1100 }">
                 <template #bodyCell="{ column, text, record }">
                     <template v-if="column.dataIndex === 'info'">
                         <span :style="{ color: isNull(record.info) ? 'var(--heading-color)' : 'var(--text-color)' }">{{
@@ -74,7 +74,7 @@ const columns = [
     {
         title: '操作',
         dataIndex: 'operation',
-        // width: 200,
+        width: 200,
         fixed: 'right',
     }
 ];

@@ -32,6 +32,12 @@ const routes = [
                 name: "ban",
                 component: () => import("./Index/ban/ban.vue"),
             },
+            {
+                // 游戏服务设置
+                path: "gameServer",
+                name: "gameServer",
+                component: () => import("./Index/gameServer/GameServer.vue"),
+            },
         ]
     }
 ]
