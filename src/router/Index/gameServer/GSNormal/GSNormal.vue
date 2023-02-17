@@ -6,6 +6,10 @@
         </div>
 
         <div class="GSNormal">
+            <div class="btn-box">
+                <a-button type="primary" style="margin-left: 280px;">保存</a-button>
+                <a-button type="primary" style="margin-left: 100px;" danger>取消</a-button>
+            </div>
             <ul>
                 <li>
                     <a-form-item label="服务器名字" :label-col=labelCol>
@@ -332,6 +336,9 @@ watch([
 
     .GSNormal {
         margin-top: 20px;
+
+        .btn-box {
+        }
 
         ul {
             padding: 0;
