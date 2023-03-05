@@ -1,5 +1,7 @@
+import { type } from "os";
+
 // 管理组的数据格式
-export interface AdminGroupData {
+export type AdminGroupData = {
     // key
     key: string,
     // 组名
@@ -11,7 +13,7 @@ export interface AdminGroupData {
 }
 
 // 管理组的权限
-export interface AdminGroupAuth {
+export type AdminGroupAuth = {
     // 组名
     groupName: string,
     // 备注

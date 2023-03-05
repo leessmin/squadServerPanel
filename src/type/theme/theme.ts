@@ -2,6 +2,6 @@
 export type ThemeType = "dark" | "light"
 
 type Color = string
-type variate = string
+type Variate = string
 // 主题的颜色
-export type ThemeColor = Map<Color, variate>
+export type ThemeColor = Map<Color, Variate>
