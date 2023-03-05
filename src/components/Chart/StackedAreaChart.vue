@@ -7,6 +7,8 @@
 import * as echarts from 'echarts';
 import { onMounted, ref, watch } from 'vue';
 import { useThemeStore } from '../../store/useThemeStore';
+// 引入default-passive-events
+import 'default-passive-events';
 
 
 
