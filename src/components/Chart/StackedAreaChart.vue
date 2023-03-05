@@ -9,25 +9,25 @@ import { onMounted, ref, watch } from 'vue';
 import { useThemeStore } from '../../store/useThemeStore';
 // 引入default-passive-events
 import 'default-passive-events';
+import SubjectChart from './SubjectChart';
 
 
 
 // 实例化主题仓库
 const themeStore = useThemeStore()
+// 实例化props
 interface Props {
     uploadSpeed: number,
     downloadSpeed: number,
     thenTime: string
 }
-// 实例化props
 const props = defineProps<Props>()
 
 
 // 获取chart
 let chart = ref<HTMLElement>()
-
-// 配置
-let option: echarts.EChartOption = {
+// 默认配置
+let optionDefault: echarts.EChartOption = {
     title: {
         show: false,
     },
@@ -77,29 +77,40 @@ let option: echarts.EChartOption = {
         {
             name: '上行',
             type: 'line',
-            areaStyle: {},
+            areaStyle: {
+                color: "#f7b54a"
+            },
+            lineStyle: {
+                color: "#f7b54a"
+            },
+            itemStyle: {
+                color: "#f7b54a"
+            },
             data: [],
         },
         {
             name: '下行',
             type: 'line',
-            areaStyle: {},
-            emphasis: {
-
+            areaStyle: {
+                color: "#5caeff"
+            },
+            lineStyle: {
+                color: "#5caeff"
+            },
+            itemStyle: {
+                color: "#5caeff"
             },
             data: [],
         },
     ]
 };
+// 储存 设置图表的对象
+let myChart: SubjectChart<echarts.EChartOption>
 
-// 声明 储存 myChart变量
-let myChart: echarts.EChartsType
-
+// 加载 echarts 图表
 onMounted(() => {
-    // console.log(chart.value)
-    myChart = echarts.init(chart.value as HTMLElement);
-
-    myChart.setOption(option)
+    // 初次加载
+    myChart = new SubjectChart(optionDefault, chart.value as HTMLElement)
 })
 
 
@@ -117,31 +128,31 @@ watch(props, (value) => {
 
     // 判读长度是否大于15
     if (uploadArr.length > 15 || downloadArr.length > 15 || thenArr.length > 15) {
-        // 大于15第一个元素要出栈
+        // 大于15 第一个元素要出栈
         uploadArr.shift()
         downloadArr.shift()
         thenArr.shift()
     }
 
-
-    // 更新option
-    (option.series as echarts.EChartOption.Series[])[0].data = uploadArr;
-    (option.series as echarts.EChartOption.Series[])[1].data = downloadArr;
-    (option.xAxis as echarts.EChartOption.XAxis[])[0].data = thenArr;
-
-    // 更新chart
-    myChart.setOption(option)
+    // 更新图表
+    myChart.setOption((option: echarts.EChartOption) => {
+        (option.series as echarts.EChartOption.Series[])[0].data = uploadArr;
+        (option.series as echarts.EChartOption.Series[])[1].data = downloadArr;
+        (option.xAxis as echarts.EChartOption.XAxis[])[0].data = thenArr;
+        return option
+    })
 })
 
 
 // 订阅主题仓库状态
 themeStore.$subscribe((mutation, state) => {
     // 刷新 主题
-    (option.xAxis as echarts.EChartOption.XAxis[])[0].axisLabel!.color = state.themeColor.get('--text-color');
-    (option.yAxis as echarts.EChartOption.YAxis[])[0].axisLabel!.color = state.themeColor.get('--text-color');
-    (option.yAxis as echarts.EChartOption.YAxis[])[0].nameTextStyle!.color = state.themeColor.get('--text-color');
-
-    myChart.setOption(option)
+    myChart.setOption((option: echarts.EChartOption) => {
+        (option.xAxis as echarts.EChartOption.XAxis[])[0].axisLabel!.color = state.themeColor.get('--text-color');
+        (option.yAxis as echarts.EChartOption.YAxis[])[0].axisLabel!.color = state.themeColor.get('--text-color');
+        (option.yAxis as echarts.EChartOption.YAxis[])[0].nameTextStyle!.color = state.themeColor.get('--text-color');
+        return option
+    })
 })
 </script>
 
