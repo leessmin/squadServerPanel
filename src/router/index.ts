@@ -5,7 +5,17 @@ const routes: readonly RouteRecordRaw[] = [
         // 控制面板 index 页面
         path: "/",
         name: "index",
-        component: () => import("../view/Index/Index.vue")
+        component: () => import("../view/Index/Index.vue"),
+        // 重定向
+        redirect: { name: 'home' },
+        children: [
+            {
+                // 首页
+                path: "home",
+                name: "home",
+                component: () => import("../view/Index/home/Home.vue")
+            }
+        ]
     }
 ]
 
