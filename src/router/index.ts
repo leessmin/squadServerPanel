@@ -14,6 +14,12 @@ const routes: readonly RouteRecordRaw[] = [
                 path: "home",
                 name: "home",
                 component: () => import("../view/Index/home/Home.vue")
+            },
+            {
+                // 添加管理组
+                path: "adminGroup",
+                name: "adminGroup",
+                component: () => import("../view/Index/adminGroup/AdminGroup.vue")
             }
         ]
     }
