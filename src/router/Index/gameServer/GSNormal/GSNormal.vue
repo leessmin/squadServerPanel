@@ -38,8 +38,7 @@
                 <li>
                     <a-form-item label="最大玩家数量" :label-col=labelCol>
                         <div class="other-box">
-                            <a-input-number id="inputNumber" v-model:value="ServerConfig.MaxPlayers" :min="1"
-                                :max="100" />
+                            <a-input-number id="inputNumber" v-model:value="ServerConfig.MaxPlayers" :min="1" :max="100" />
                         </div>
                     </a-form-item>
                     <span>(MaxPlayers)服务器最大能容纳的玩家数量。最大值：100</span>
@@ -158,8 +157,7 @@
                 <li>
                     <a-form-item label="消息间隔" :label-col=labelCol>
                         <div class="other-box">
-                            <a-input-number id="inputNumber" v-model:value="ServerConfig.ServerMessageInterval"
-                                :min="1" />
+                            <a-input-number id="inputNumber" v-model:value="ServerConfig.ServerMessageInterval" :min="1" />
                         </div>
                     </a-form-item>
                     <span>(ServerMessageInterval)服务器消息的间隔，单位秒。默认值：300</span>
@@ -337,8 +335,7 @@ watch([
     .GSNormal {
         margin-top: 20px;
 
-        .btn-box {
-        }
+        .btn-box {}
 
         ul {
             padding: 0;

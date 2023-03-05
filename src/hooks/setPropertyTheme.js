@@ -18,12 +18,12 @@ export function setPropertyTheme(isDark) {
 const body = document.body.style;
 
 function forEachHandle(value, key){
-    // 判断是否有value,没有value就删除  还原设置
-    if (isNull(value)){
-        body.removeProperty(key)
+    // 判断是否有value,没有value就删除  还原设置  这段是无效代码
+    // if (isNull(value)){
+    //     body.removeProperty(key)
 
-        return
-    }
+    //     return
+    // }
 
     body.setProperty(key, value, 'important');
 }
