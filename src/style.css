@@ -1,1 +1,245 @@
+body {
+    background-color: var(--body-background) !important;
+    color: var(--text-color) !important;
+    min-width: 1200px;
+}
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--heading-color) !important;
+    user-select: none;
+}
+
+p {
+    color: var(--text-color);
+}
+
+html {
+    overflow-y: overlay;
+}
+
+ul {
+    list-style: none;
+}
+
+/* margin-top: 0; */
+.mt-zero {
+    margin-top: 0 !important;
+}
+
+main {
+    padding: 20px;
+}
+
+section .title-box {
+    height: 40px;
+    padding-left: 10px;
+    border-bottom: 1px solid var(--border-color-base);
+    line-height: 40px;
+    padding-bottom: 10px;
+    box-sizing: content-box;
+
+
+}
+
+section .title-box h3 {
+    font-weight: bold;
+}
+
+
+
+
+
+
+/*
+* ant 组件的样式
+*/
+
+
+/* table相关 :start */
+/* table 表头 的颜色 */
+.ant-table-thead .ant-table-cell {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color);
+}
+
+/* table 表body 的颜色 */
+.ant-table-tbody .ant-table-cell {
+    background-color: var(--table-body-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color);
+}
+
+.ant-table-content table {
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-table-container {
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link svg,
+.ant-pagination-next .ant-pagination-item-link svg {
+    fill: var(--text-color);
+}
+
+.ant-pagination-item {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+}
+
+.ant-pagination-item a {
+    color: var(--text-color) !important;
+}
+
+.ant-pagination-item-ellipsis {
+    color: var(--text-color) !important;
+}
+
+.ant-select-selector {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color) !important;
+}
+
+.ant-select-arrow svg {
+    fill: var(--text-color);
+}
+
+.ant-select-dropdown {
+    background-color: var(--table-header-bg) !important;
+    border-color: var(--border-color-base) !important;
+    color: var(--text-color) !important;
+}
+
+.ant-select-dropdown .ant-select-item {
+    color: var(--heading-color) !important;
+}
+
+.ant-pagination-item-active {
+    background-color: var(--ant-primary-color) !important;
+}
+
+.ant-pagination-total-text {
+    color: var(--text-color) !important;
+}
+
+.ant-table-filter-dropdown {
+    background-color: var(--component-background) !important;
+}
+
+.ant-dropdown-menu {
+    background-color: var(--component-background) !important;
+}
+
+.ant-dropdown-menu-title-content span {
+    color: var(--heading-color) !important;
+}
+
+/* table相关 :end */
+
+
+
+/* Popconfirm 气泡确认框 :start */
+
+.ant-popover-inner-content {
+    background-color: var(--component-background);
+}
+
+.ant-popover-message-title {
+    color: var(--text-color);
+}
+
+/* Popconfirm 气泡确认框 :end */
+
+
+/* 弹出框 :start */
+
+.ant-modal-content {
+    background-color: var(--component-background) !important;
+}
+
+.ant-modal-header {
+    background-color: var(--component-background) !important;
+}
+
+.ant-modal-title {
+    color: var(--heading-color) !important;
+}
+
+.ant-modal-close-icon svg {
+    fill: var(--text-color);
+}
+
+/* 弹出框 :end */
+
+
+/* 表单 :start */
+
+.ant-form-item-required {
+    color: var(--text-color) !important;
+}
+
+.ant-form-item-label label {
+    color: var(--text-color) !important;
+}
+
+.ant-checkbox-wrapper-checked span {
+    color: var(--text-color) !important;
+}
+
+.ant-checkbox-wrapper span {
+    color: var(--text-color) !important;
+}
+
+/* 表单 :end */
+
+
+/* btn :start */
+
+.ant-btn-dangerous.ant-btn-primary[disabled] {
+    background-color: var(--disabled-bg) !important;
+    border-color: var(--border-color-base) !important;
+
+}
+
+.ant-btn-dangerous.ant-btn-primary[disabled] span {
+    color: var(--text-color-secondary) !important;
+}
+
+/* btn :end */
+
+
+
+/* 布局 :start */
+
+.ant-layout {
+    background-color: var(--body-background) !important;
+}
+
+.ant-layout-footer {
+    background-color: var(--body-background) !important;
+    border-top: 1px solid var(--border-color-base);
+    color: var(--text-color-secondary) !important;
+}
+
+/* 布局 :end */
+
+
+
+/* 解决table不换行问题 */
+.ant-table-wrapper {
+    word-break: break-all;
+    word-wrap: break-word;
+}
