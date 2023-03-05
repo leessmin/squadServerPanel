@@ -26,6 +26,12 @@ const routes: readonly RouteRecordRaw[] = [
                 path: "adminUser",
                 name: "adminUser",
                 component: () => import("../view/Index/adminUser/AdminUser.vue")
+            },
+            {
+                // 封禁
+                path: "ban",
+                name: "ban",
+                component: () => import("../view/Index/ban/Ban.vue")
             }
         ]
     }
