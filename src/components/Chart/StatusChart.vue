@@ -16,20 +16,11 @@ const themeStore = useThemeStore()
 // 实例化props
 interface Props {
     chartValue: number
+    charName: string
 }
 const props = defineProps<Props>()
 
-// 数据
-const Data = [
-    {
-        value: props.chartValue,
-        name: 'cpu',
-        detail: {
-            valueAnimation: true,
-            offsetCenter: ['0%', '0%']
-        }
-    },
-];
+
 
 // Chart的配置
 let optionDefault: echarts.EChartsOption = {
@@ -73,7 +64,16 @@ let optionDefault: echarts.EChartsOption = {
                 distance: 50
             },
             // 数据存放地址
-            data: Data,
+            data: [
+                {
+                    value: props.chartValue,
+                    name: props.charName,
+                    detail: {
+                        valueAnimation: true,
+                        offsetCenter: ['0%', '0%']
+                    }
+                },
+            ],
             title: {
                 // 不显示id
                 show: false,
@@ -96,13 +96,12 @@ let optionDefault: echarts.EChartsOption = {
 // 获取chart
 const chart = ref<HTMLElement>()
 
-// 储存图标类
+// 储存 设置图表的对象
 let myChart: SubjectChart<echarts.EChartsOption>
 
-// 初始化myChart
+// 加载 echarts 图表
 onMounted(() => {
-    /* myChart = echarts.init(chart.value as HTMLElement)
-    myChart.setOption(option) */
+    // 初次加载
     myChart = new SubjectChart(optionDefault, chart.value as HTMLElement)
 })
 
@@ -117,110 +116,30 @@ watch(props, (value, oldValue) => {
                     data: [
                         {
                             value: value.chartValue,
-                            name: 'cpu',
+                            name: value.charName,
                             detail: {
                                 valueAnimation: true,
                                 offsetCenter: ['0%', '0%']
                             }
                         },
                     ],
-                    pointer: {
-                        show: false
-                    }
                 }
             ]
         };
         return optionTemp;
     })
-    // 更新option
-    // option.series[0].data[0].value = value.chartValue
-    // // 更新数据
-    // myChart.setOption(option)
 })
 
 // 订阅主题仓库
 themeStore.$subscribe((mutation, state) => {
     // 更新主题
-    let tempOption = {
-        series: [
-            {
-                type: 'gauge',
-                radius: '90%',
-                startAngle: 90,
-                endAngle: -270,
-                pointer: {
-                    show: false
-                },
-                progress: {
-                    show: true,
-                    overlap: false,
-                    roundCap: true,
-                    clip: false,
-                    itemStyle: {
-                        borderWidth: 1,
-                        borderColor: state.themeColor.get("--ant-primary-color"),
-                        color: state.themeColor.get("--ant-primary-color")
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: [
-                            [1, state.themeColor.get("--border-color-base")], // 0~10% 红轴
-                        ],
-                        width: 4
-                    }
-                },
-                splitLine: {
-                    show: false,
-                    distance: 0,
-                    length: 10
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
-                    show: false,
-                    distance: 50
-                },
-                // 数据存放地址
-                data: Data,
-                title: {
-                    // 不显示id
-                    show: false,
-                },
-                detail: {
-                    width: 20,
-                    height: 14,
-                    fontSize: 20,
-                    color: state.themeColor.get("--ant-primary-color"),
-                    // borderColor: 'inherit',
-                    // borderRadius: 20,
-                    // borderWidth: 1,
-                    formatter: '{value}%'
-
-                }
-            }
-        ]
-    }
     myChart.setOption((option: echarts.EChartsOption) => {
         // 更新主题
         let tempOption: echarts.EChartsOption = {
             series: [
                 {
-                    type: 'gauge',
-                    radius: '90%',
-                    startAngle: 90,
-                    endAngle: -270,
-                    pointer: {
-                        show: false
-                    },
                     progress: {
-                        show: true,
-                        overlap: false,
-                        roundCap: true,
-                        clip: false,
                         itemStyle: {
-                            borderWidth: 1,
                             borderColor: state.themeColor.get("--ant-primary-color"),
                             color: state.themeColor.get("--ant-primary-color")
                         }
@@ -230,37 +149,10 @@ themeStore.$subscribe((mutation, state) => {
                             color: [
                                 [1, state.themeColor.get("--border-color-base") as string], // 0~10% 红轴
                             ],
-                            width: 4
                         }
                     },
-                    splitLine: {
-                        show: false,
-                        distance: 0,
-                        length: 10
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
-                        show: false,
-                        distance: 50
-                    },
-                    // 数据存放地址
-                    data: Data,
-                    title: {
-                        // 不显示id
-                        show: false,
-                    },
                     detail: {
-                        width: 20,
-                        height: 14,
-                        fontSize: 20,
                         color: state.themeColor.get("--ant-primary-color"),
-                        // borderColor: 'inherit',
-                        // borderRadius: 20,
-                        // borderWidth: 1,
-                        formatter: '{value}%'
-
                     }
                 }
             ]

@@ -29,35 +29,35 @@
                 <li>
                     <div class="content">
                         <p>负载状态</p>
-                        <StatusChart :chartValue="statusValue.system"></StatusChart>
+                        <StatusChart :chartValue="statusValue.system" charName="system"></StatusChart>
                         <p>{{ statusInfo.system }}</p>
                     </div>
                 </li>
                 <li>
                     <div class="content">
                         <p>CPU使用率</p>
-                        <StatusChart :chartValue="statusValue.cpu"></StatusChart>
+                        <StatusChart :chartValue="statusValue.cpu" charName="cpu"></StatusChart>
                         <p>{{ statusInfo.cpu }}</p>
                     </div>
                 </li>
                 <li>
                     <div class="content">
                         <p>内存使用率</p>
-                        <StatusChart :chartValue="statusValue.memory"></StatusChart>
+                        <StatusChart :chartValue="statusValue.memory" charName="memory"></StatusChart>
                         <p>{{ statusInfo.memory }}</p>
                     </div>
                 </li>
                 <li>
                     <div class="content">
                         <p>swap使用率</p>
-                        <StatusChart :chartValue="statusValue.swap"></StatusChart>
+                        <StatusChart :chartValue="statusValue.swap" charName="swap"></StatusChart>
                         <p>{{ statusInfo.swap }}</p>
                     </div>
                 </li>
                 <li>
                     <div class="content">
                         <p>硬盘使用率</p>
-                        <StatusChart :chartValue="statusValue.disk"></StatusChart>
+                        <StatusChart :chartValue="statusValue.disk" charName="disk"></StatusChart>
                         <p>{{ statusInfo.disk }}</p>
                     </div>
                 </li>
