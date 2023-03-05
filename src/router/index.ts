@@ -32,6 +32,22 @@ const routes: readonly RouteRecordRaw[] = [
                 path: "ban",
                 name: "ban",
                 component: () => import("../view/Index/ban/Ban.vue")
+            },
+            {
+                // 游戏服务设置
+                path: "gameServer",
+                name: "gameServer",
+                component: () => import("../view/Index/gameServer/GameServer.vue"),
+                // 重定向
+                redirect: { name: "GSNormal" },
+                children: [
+                    {
+                        // 常规配置
+                        path: "GSNormal",
+                        name: "GSNormal",
+                        component: () => import("../view/Index/gameServer/GSNormal/GSNormal.vue")
+                    }
+                ]
             }
         ]
     }
