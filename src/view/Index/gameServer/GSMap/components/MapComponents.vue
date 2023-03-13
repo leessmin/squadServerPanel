@@ -9,7 +9,7 @@
             <ul @dragover="dragoverHandle" class="box" ref="mapUlDom">
                 <li @dragend="dragendHandle" @dragstart="dragstartHandle" class="square" draggable="true"
                     v-for="(a, i) in mapSelected">
-                    <a-tag color="pink">{{ a }}</a-tag>
+                    <a-tag :color="randomRGBColor()">{{ a }}</a-tag>
                 </li>
             </ul>
         </div>
@@ -18,7 +18,7 @@
             <ul @dragover="dragoverHandle" class="box">
                 <li @dragend="dragendHandle" @dragstart="dragstartHandle" class="square" draggable="true"
                     v-for="(a, i) in mapSelect">
-                    <a-tag color="pink">{{ a }}</a-tag>
+                    <a-tag :color="randomRGBColor()">{{ a }}</a-tag>
                 </li>
             </ul>
         </div>
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { Ref, ref, watch, nextTick } from 'vue';
 import getUlMapValue from '../../../../../util/gameServer/GSMap/getUlMapValue';
+import randomRGBColor from '../../../../../util/gameServer/GSMap/randomRGBColor';
 
 
 
