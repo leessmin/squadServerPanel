@@ -46,6 +46,12 @@ const routes: readonly RouteRecordRaw[] = [
                         path: "GSNormal",
                         name: "GSNormal",
                         component: () => import("../view/Index/gameServer/GSNormal/GSNormal.vue")
+                    },
+                    {
+                        // 地图循环
+                        path: "GSMap",
+                        name: "GSMap",
+                        component: () => import("../view/Index/gameServer/GSMap/GSMap.vue")
                     }
                 ]
             }
