@@ -17,9 +17,12 @@
                             <a-tag>
                                 {{ msg }}
 
-                                <up-outlined style="cursor: pointer;" @click="upOrDownHandle(msg, 0)" />
-                                <down-outlined style="cursor: pointer;" @click="upOrDownHandle(msg, 1)" />
-                                <close-outlined style="cursor: pointer;" @click="handleClose(msg)" />
+                                <div style="display: inline-block;">
+                                    <up-outlined style="cursor: pointer;" @click="upOrDownHandle(msg, 0)" />
+                                    <down-outlined style="cursor: pointer;" @click="upOrDownHandle(msg, 1)" />
+                                    <close-outlined style="cursor: pointer;" @click="handleClose(msg)" />
+                                </div>
+
                             </a-tag>
                         </li>
                     </ul>
@@ -27,9 +30,9 @@
             </div>
 
             <div class="input-box">
-                <a-input-group compact style="width: 80%;">
-                    <a-input placeholder="请输入循环公告的消息" v-model:value="msgValue" style="width: calc(100% - 88px)" />
-                    <a-button type="primary" @click="addMessageHandle()">添加消息</a-button>
+                <a-input-group compact style="width: 80%;" size="large">
+                    <a-input placeholder="请输入循环公告的消息" v-model:value="msgValue" style="width: calc(100% - 100px)" />
+                    <a-button size="large" type="primary" @click="addMessageHandle()">添加消息</a-button>
                 </a-input-group>
             </div>
 
@@ -124,7 +127,7 @@ const handleClose = (msg: string) => {
 
             .content-box {
                 width: 100%;
-                height: 450px;
+                height: 480px;
                 border: 4px solid var(--ant-primary-color);
                 border-radius: 5px;
                 padding: 10px;
@@ -171,7 +174,7 @@ const handleClose = (msg: string) => {
 
         .input-box {
             width: 100%;
-            height: 60px;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
