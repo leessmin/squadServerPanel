@@ -52,6 +52,12 @@ const routes: readonly RouteRecordRaw[] = [
                         path: "GSMap",
                         name: "GSMap",
                         component: () => import("../view/Index/gameServer/GSMap/GSMap.vue")
+                    },
+                    {
+                        // 每日消息
+                        path: "GSDayMessage",
+                        name: "GSDayMessage",
+                        component: () => import("../view/Index/gameServer/GSDayMessage/GSDayMessage.vue")
                     }
                 ]
             }

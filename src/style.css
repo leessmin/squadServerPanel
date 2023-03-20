@@ -53,6 +53,18 @@ section .title-box h3 {
 
 
 
+/*
+*
+* 引入外部字体
+*
+*/
+@font-face {
+    font-family: SourceCodePro;
+    src: url('./assets/font/SourceCodePro-Bold-3.ttf');
+}
+
+
+
 
 
 /*
