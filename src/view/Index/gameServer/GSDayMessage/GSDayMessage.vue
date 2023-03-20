@@ -11,7 +11,7 @@
             </div>
 
             <div class="content">
-                <a-textarea class="textarea-input" v-model:value="value" placeholder="请输入服务器介绍[每日消息]" :rows="20" />
+                <a-textarea class="textarea-input" v-model:value="value" placeholder="请输入服务器介绍[每日消息]" :rows="18" />
             </div>
 
             <div class="btn-box">
@@ -45,7 +45,7 @@ const value = ref<string>('');
             font-family: SourceCodePro;
 
             .textarea-input{
-                font-size: 1.1rem;
+                font-size: 1rem;
                 background-color: var(--table-header-bg);
                 color: var(--text-color);
                 border-color: var(--border-color-base);
