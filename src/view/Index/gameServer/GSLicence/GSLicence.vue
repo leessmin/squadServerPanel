@@ -1,17 +1,17 @@
 <template>
-    <!-- 每日消息 -->
+    <!-- 许可证 -->
     <div class="main">
         <div class="title-box">
-            <h3>每日消息</h3>
+            <h3>许可证</h3>
         </div>
 
-        <div class="GSDayMessage">
+        <div class="GSLicence">
             <div class="title">
-                <p>服务器介绍[每日消息] || 支持两个 HTML 标记</p>
+                <p>添加许可证成为官方认证服务器</p>
             </div>
 
             <div class="content">
-                <a-textarea class="textarea-input" v-model:value="value" placeholder="请输入服务器介绍[每日消息]" :rows="18" />
+                <a-textarea class="textarea-input" v-model:value="value" placeholder="请输入许可证" :rows="18" />
             </div>
 
             <div class="btn-box">
@@ -31,7 +31,7 @@ const value = ref<string>('');
 
 <style scoped lang="less">
 .main {
-    .GSDayMessage {
+    .GSLicence {
         .title {
             padding: 10px;
             padding-bottom: 0;
@@ -41,10 +41,10 @@ const value = ref<string>('');
             }
         }
 
-        .content{
+        .content {
             font-family: SourceCodePro;
 
-            .textarea-input{
+            .textarea-input {
                 font-size: 1rem;
                 background-color: var(--table-header-bg);
                 color: var(--text-color);
@@ -52,7 +52,7 @@ const value = ref<string>('');
             }
         }
 
-        .btn-box{
+        .btn-box {
             height: 80px;
             display: flex;
             justify-content: space-evenly;

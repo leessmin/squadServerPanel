@@ -64,6 +64,12 @@ const routes: readonly RouteRecordRaw[] = [
                         path: "GSCycleAnnouncement",
                         name: "GSCycleAnnouncement",
                         component: () => import("../view/Index/gameServer/GSCycleAnnouncement/GSCycleAnnouncement.vue")
+                    },
+                    {
+                        // 许可证
+                        path: "GSLicence",
+                        name: "GSLicence",
+                        component: () => import("../view/Index/gameServer/GSLicence/GSLicence.vue")
                     }
                 ]
             }
