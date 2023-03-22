@@ -72,6 +72,12 @@ const routes: readonly RouteRecordRaw[] = [
                         component: () => import("../view/Index/gameServer/GSLicence/GSLicence.vue")
                     }
                 ]
+            },
+            {
+                // 监控
+                path: "monitor",
+                name: "monitor",
+                component: () => import("../view/Index/monitor/Monitor.vue")
             }
         ]
     }

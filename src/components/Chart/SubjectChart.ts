@@ -15,7 +15,7 @@ export default class SubjectChart<T extends echarts.EChartsOption | echarts.ECha
     }
 
     // 更新图表
-    public updateChart() {
+    private updateChart() {
         // 更新图表             // TODO：类型 echarts.EChartsOption 不能使用setOption方法， 暂时使用 类型断言 any
         this.myChart.setOption(this.option as any)
     }
