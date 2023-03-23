@@ -10,10 +10,18 @@ import * as echarts from 'echarts';
 import 'default-passive-events';
 import SubjectChart from './SubjectChart';
 import { useThemeStore } from '../../store/useThemeStore';
+import { MonitorBarType } from '../../type/monitor/monitor';
 
 
 // 实例化仓库
 const themeStore = useThemeStore()
+
+
+// 定义接收props
+const props = defineProps<{
+    // 系统运行的数据
+    chartData: MonitorBarType
+}>()
 
 
 // 获取系统 平均负载
@@ -22,7 +30,7 @@ let chart = ref<HTMLElement>()
 let optionDefault: echarts.EChartsOption = {
     xAxis: {
         type: 'category',
-        data: ['03/01', '03/02', '03/03', '03/04', '03/05', '03/06', '03/07', '03/08', '03/10', '03/11', '03/12', '03/13', '03/14', '03/15', '03/16', '03/17', '03/18', '03/19', '03/20', '03/21', '03/22', '03/23', '03/24', '03/25', '03/26', '03/27', '03/28', '03/29', '03/30'],
+        data: props.chartData.date,
         axisLabel: {
             color: themeStore.themeColor.get('--text-color')
         }
@@ -35,7 +43,7 @@ let optionDefault: echarts.EChartsOption = {
     },
     series: [
         {
-            data: [10, 88, 66, 70, 70, 40, 55, 10, 88, 66, 70, 70, 40, 55, 10, 88, 66, 70, 70, 40, 55, 10, 88, 66, 70, 70, 40, 55, 55],
+            data: props.chartData.data,
             type: 'bar',
             showBackground: true,
             backgroundStyle: {
