@@ -49,6 +49,12 @@
                 </template>
                 监控
             </a-menu-item>
+            <a-menu-item key="log">
+                <template #icon>
+                    <file-protect-outlined />
+                </template>
+                日志
+            </a-menu-item>
             <a-menu-item key="setting">
                 <template #icon>
                     <setting-outlined />
@@ -97,6 +103,7 @@ const menuState = reactive({
 // 菜单选择改变 回调
 function selectHandle(args: { item: string, key: string, selectedKeys: string }) {
     console.log(args.key)
+    // 跳转至对应的页面
     router.push({
         name: args.key
     })
