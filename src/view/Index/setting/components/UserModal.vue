@@ -27,7 +27,7 @@
 import { FormInstance, Rule } from 'ant-design-vue/lib/form';
 import { reactive, ref, watch } from 'vue';
 
-const emit = defineEmits(['visibleChange'])
+const emit = defineEmits(['update:isUserVisible'])
 
 const props = defineProps<{
     // 修改账号密码弹出框是否显示
@@ -43,7 +43,7 @@ watch(props, (value, oldValue) => {
 })
 
 watch(isVisible, (value, oldValue) => {
-    emit('visibleChange', value)
+    emit('update:isUserVisible', value)
 })
 
 // 点击确定的回调

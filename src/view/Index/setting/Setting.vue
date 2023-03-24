@@ -49,7 +49,7 @@
     </main>
 
     <!-- 修改账号密码 弹出框 -->
-    <UserModal :isUserVisible="isUserVisible" @visibleChange="(value) => { isUserVisible = value }"></UserModal>
+    <UserModal v-model:isUserVisible="isUserVisible"></UserModal>
 </template>
 
 <script setup lang="ts">
