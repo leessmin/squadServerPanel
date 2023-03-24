@@ -84,6 +84,12 @@ const routes: readonly RouteRecordRaw[] = [
                 path: "log",
                 name: "log",
                 component: () => import('../view/Index/log/Log.vue')
+            },
+            {
+                // 设置
+                path: "setting",
+                name: "setting",
+                component: () => import("../view/Index/setting/Setting.vue")
             }
         ]
     }
