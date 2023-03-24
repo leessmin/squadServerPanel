@@ -60,7 +60,7 @@ import UserModal from './components/UserModal.vue'
 
 
 // a-form-item label 的宽度
-const labelCol = { style: { width: '280px' } };
+const labelCol = { style: { width: '100px' } };
 
 // 服务器的ip
 const serverIp = ref("127.0.0.1")
@@ -89,6 +89,7 @@ const isUserVisible = ref(false)
 
             span {
                 color: var(--text-color-secondary);
+                width: 400px;
             }
         }
     }
