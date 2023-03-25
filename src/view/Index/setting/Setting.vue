@@ -36,6 +36,15 @@
                         <span>监听系统信息的时间间隔，建议1-5秒</span>
                     </li>
                     <li>
+                        <a-form-item label="游戏服务器路径" name="gameServePath" style="margin: 0;" :label-col="labelCol">
+                            <div class="input-box">
+                                <a-input v-model:value="gameServePath" />
+                            </div>
+                        </a-form-item>
+                        <a-button type="primary" style="margin: 0 10px;">保存</a-button>
+                        <span>游戏服务器的根路径</span>
+                    </li>
+                    <li>
                         <a-form-item label="账号密码" name="listeningTime" style="margin: 0;" :label-col="labelCol">
                             <div class="input-box">
                                 <a-button type="primary" style="width: 100%;"
@@ -60,12 +69,14 @@ import UserModal from './components/UserModal.vue'
 
 
 // a-form-item label 的宽度
-const labelCol = { style: { width: '100px' } };
+const labelCol = { style: { width: '120px' } };
 
 // 服务器的ip
 const serverIp = ref("127.0.0.1")
 // 面板端口
 const panelPort = ref(8888)
+// 游戏服务器路径
+const gameServePath = ref(`C:\\Windows\\squad`)
 // 监听时间
 const listeningTime = ref(5)
 
