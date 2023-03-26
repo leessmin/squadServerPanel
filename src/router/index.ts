@@ -92,6 +92,12 @@ const routes: readonly RouteRecordRaw[] = [
                 component: () => import("../view/Index/setting/Setting.vue")
             }
         ]
+    },
+    {
+        // 登录页面
+        path: "/login",
+        name: "login",
+        component: () => import("../view/Login/Login.vue")
     }
 ]
 
