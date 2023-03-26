@@ -2,7 +2,7 @@
     <!-- 登录页面 -->
     <main>
         <section class="login-section">
-            <h1>登录</h1>
+            <h1>登录面板</h1>
             <a-form :model="formState" name="normal_login" class="login-form" @finish="onFinish"
                 :label-col="{ style: { width: '70px' } }" @finishFailed="onFinishFailed">
                 <a-form-item label="用户名" name="username" :rules="[{ required: true, message: '请输入用户名！！！' }]">
@@ -82,7 +82,8 @@ main {
     .login-section {
         width: 450px;
         height: 350px;
-        background-color: #fff;
+        background-color: var(--body-background);
+        filter: opacity(90%);
         border-radius: 10px;
         display: flex;
         justify-content: space-evenly;
