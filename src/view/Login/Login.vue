@@ -2,6 +2,7 @@
     <!-- 登录页面 -->
     <main>
         <section class="login-section">
+            <h1>登录</h1>
             <a-form :model="formState" name="normal_login" class="login-form" @finish="onFinish"
                 :label-col="{ style: { width: '70px' } }" @finishFailed="onFinishFailed">
                 <a-form-item label="用户名" name="username" :rules="[{ required: true, message: '请输入用户名！！！' }]">
@@ -64,7 +65,7 @@ const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
 };
 const disabled = computed(() => {
-    return !(formState.username && formState.password);
+    return !(formState.username && formState.password && formState.verifyCode);
 });
 </script>
 
@@ -79,13 +80,20 @@ main {
     align-items: center;
 
     .login-section {
-        width: 400px;
-        height: 300px;
+        width: 450px;
+        height: 350px;
         background-color: #fff;
         border-radius: 10px;
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
+        flex-direction: column;
+
+        h1{
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
 
         .login-form {
             width: 80%;
