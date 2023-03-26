@@ -26,7 +26,7 @@
                         <a-input v-model:value="formState.verifyCode">
                         </a-input>
                         <div class="verify-code">
-                            <img src="/public/vcode.png" alt="">
+                            <img src="/vcode.png" alt="">
                         </div>
                     </div>
 
