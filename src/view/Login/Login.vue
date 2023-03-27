@@ -44,6 +44,7 @@
 
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 interface FormState {
     username: string;
@@ -52,6 +53,9 @@ interface FormState {
     verifyCode: string;
 }
 
+// 初始化路由
+const router = useRouter()
+
 const formState = reactive<FormState>({
     username: '',
     password: '',
@@ -59,6 +63,12 @@ const formState = reactive<FormState>({
 });
 const onFinish = (values: any) => {
     console.log('Success:', values);
+    // TODO: 需要判断是否为第一次登录
+    // 生成初始化设置页面的登录路由
+    router.addRoute({ path: '/init', name: "init", component: () => import('../Init/Init.vue') })
+    router.push({
+        name: "init"
+    })
 };
 
 const onFinishFailed = (errorInfo: any) => {
@@ -90,7 +100,7 @@ main {
         align-items: center;
         flex-direction: column;
 
-        h1{
+        h1 {
             font-size: 2rem;
             font-weight: 600;
             margin: 10px 0;

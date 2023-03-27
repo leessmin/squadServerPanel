@@ -98,7 +98,7 @@ const routes: readonly RouteRecordRaw[] = [
         path: "/login",
         name: "login",
         component: () => import("../view/Login/Login.vue")
-    }
+    },
 ]
 
 const router = createRouter({
