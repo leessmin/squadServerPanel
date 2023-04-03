@@ -62,6 +62,14 @@
                     <span>(PublicQueueLimit)服务器排队大小，供普通用户使用。默认值：25</span>
                 </li>
                 <li>
+                    <a-form-item label="标签" :label-col="labelCol">
+                        <div class="other-box">
+                            <a-input v-model:value="ServerConfig.Tags" />
+                        </div>
+                    </a-form-item>
+                    <span>(Tags)服务器的标签，默认值：null</span>
+                </li>
+                <li>
                     <a-form-item label="换图模式" :label-col="labelCol">
                         <div class="other-box">
                             <a-select ref="select" v-model:value="ServerConfig.MapRotationMode" style="width: 120px">
@@ -269,6 +277,8 @@ const ServerConfig = reactive<ServerConfigType>({
     NumReservedSlots: 0,
     // 排队人数
     PublicQueueLimit: 25,
+    // 服务器的标签
+    Tags: "",
     // 换图模式
     MapRotationMode: 'LayerList',
     // 随机列表

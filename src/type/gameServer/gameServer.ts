@@ -12,6 +12,8 @@ export type ServerConfigType = {
     NumReservedSlots: number,
     // 排队人数
     PublicQueueLimit: number,
+    // 服务器的标签
+    Tags: string,
     // 换图模式
     MapRotationMode: string,
     // 随机列表
