@@ -63,11 +63,11 @@
                 </li>
                 <li>
                     <a-form-item label="标签" :label-col="labelCol">
-                        <div class="other-box">
+                        <div class="input-box">
                             <a-input v-model:value="ServerConfig.Tags" />
                         </div>
                     </a-form-item>
-                    <span>(Tags)服务器的标签，默认值：null</span>
+                    <span>(Tags)服务器的标签，空格分割，默认值：null</span>
                 </li>
                 <li>
                     <a-form-item label="换图模式" :label-col="labelCol">
