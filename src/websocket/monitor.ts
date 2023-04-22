@@ -86,10 +86,10 @@ function netHandle(net: netType): dealNetType {
 	}
 
 	let dn: dealNetType = {
-		now_recv: Number(((net.bytes_recv - beforeNet.bytes_recv) / 1000 / 1000).toFixed(2)),
-		now_sent: Number(((net.bytes_sent - beforeNet.bytes_sent) / 1000 / 1000).toFixed(2)),
-		bytes_recv: Number((beforeNet.bytes_recv / 1000 / 1000 / 1000).toFixed(2)),
-		bytes_sent: Number((beforeNet.bytes_sent / 1000 / 1000 / 1000).toFixed(2)),
+		now_recv: Number(((net.bytes_recv - beforeNet.bytes_recv) / 1024 / 1024).toFixed(2)),
+		now_sent: Number(((net.bytes_sent - beforeNet.bytes_sent) / 1024 / 1024).toFixed(2)),
+		bytes_recv: Number((beforeNet.bytes_recv / 1024 / 1024 / 1024).toFixed(2)),
+		bytes_sent: Number((beforeNet.bytes_sent / 1024 / 1024 / 1024).toFixed(2)),
 	}
 
 	beforeNet = net
