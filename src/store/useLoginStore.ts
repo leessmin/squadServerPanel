@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import http from "../http/http";
-import { captchaType, loginType } from "../type/api/login";
+import { captchaType, loginType, verifyType } from "../type/api/login";
 import { apiType } from "../type/api/api";
 import { Ref, ref } from "vue";
 import router from "../router";
@@ -87,10 +87,36 @@ export const useLoginStore = defineStore("login", () => {
 		})
 	}
 
+	// 验证token是否有效
+	async function verifyToken() {
+		// 获取token
+		let token = localStorage.getItem("token")
+
+		// 整合form-data
+		let formData = new FormData()
+		formData.append("token", (token as string))
+
+		const result = await http().Require<apiType<verifyType>>("/auth/verify", {
+			headers: {
+				"Authorization": `Bearer ${token}`
+			}
+		})
+
+		// 判断token是否有效
+		if (result?.code != 200) {
+			// token 无效了
+			// 清除localStorage，刷新页面
+			localStorage.clear()
+			location.reload()
+		}
+
+	}
+
 	return {
 		captcha,
 		getCaptcha,
 		Login,
-		initServer
+		initServer,
+		verifyToken
 	}
 })

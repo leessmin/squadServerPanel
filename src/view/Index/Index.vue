@@ -17,6 +17,14 @@
 
 <script setup lang="ts">
 import Menu from './components/Menu.vue';
+import { useLoginStore } from '../../store/useLoginStore';
+
+// 实例化仓库
+const LoginStore = useLoginStore()
+
+// 验证token是否有效
+LoginStore.verifyToken()
+
 
 </script>
 

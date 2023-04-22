@@ -48,6 +48,7 @@ import { Ref, computed, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useLoginStore } from '../../store/useLoginStore';
 import { captchaType } from '../../type/api/login';
+import { message } from 'ant-design-vue';
 
 interface FormState {
 	username: string;
@@ -82,6 +83,7 @@ const onFinish = async (values: FormState) => {
 			name: "init"
 		})
 	} else {
+		message.success("登录成功")
 		// 登录成功
 		router.push({
 			name: "index"

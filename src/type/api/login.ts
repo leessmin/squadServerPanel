@@ -13,3 +13,8 @@ export type loginType = {
 	// token
 	token: string
 }
+
+// 验证token
+export type verifyType = {
+	token: string
+}
