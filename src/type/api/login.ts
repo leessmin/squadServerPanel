@@ -5,3 +5,11 @@ export type captchaType = {
 	// 验证码图片
 	image: string,
 } | undefined
+
+// 登录
+export type loginType = {
+	// 是否为第一次登录
+	first: boolean,
+	// token
+	token: string
+}

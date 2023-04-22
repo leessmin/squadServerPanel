@@ -26,7 +26,8 @@
 						<a-input v-model:value="formState.verifyCode">
 						</a-input>
 						<div class="verify-code">
-							<img :src="captcha?.image" alt="验证码好像消失了" title="点击更换验证码" style="cursor: pointer;" @click="LoginStore.getCaptcha()">
+							<img :src="captcha?.image" alt="验证码好像消失了" title="点击更换验证码" style="cursor: pointer;"
+								@click="LoginStore.getCaptcha()">
 						</div>
 					</div>
 
@@ -63,14 +64,30 @@ const formState = reactive<FormState>({
 	password: '',
 	verifyCode: '',
 });
-const onFinish = (values: any) => {
-	console.log('Success:', values);
-	// TODO: 需要判断是否为第一次登录
-	// 生成初始化设置页面的登录路由
-	router.addRoute({ path: '/init', name: "init", component: () => import('../Init/Init.vue') })
-	router.push({
-		name: "init"
-	})
+const onFinish = async (values: FormState) => {
+	// 登录
+	let isOk = await LoginStore.Login(values.username, values.password, (captcha.value?.id as string), values.verifyCode)
+
+	// 判断登录是否成功
+	if (isOk == -1) {
+		// 登录失败
+		// 刷新验证码
+		LoginStore.getCaptcha()
+		return
+	} else if (isOk == 0) {
+		// 初次登录
+		// 生成初始化设置页面的登录路由
+		router.addRoute({ path: '/init', name: "init", component: () => import('../Init/Init.vue') })
+		router.push({
+			name: "init"
+		})
+	} else {
+		// 登录成功
+		router.push({
+			name: "index"
+		})
+	}
+
 };
 
 const onFinishFailed = (errorInfo: any) => {
@@ -86,7 +103,6 @@ const LoginStore = useLoginStore()
 LoginStore.$subscribe((mutation, state) => {
 	// 储存验证码
 	captcha.value = state.captcha
-	console.log(captcha.value);
 })
 
 // 发送请求 获取验证码
