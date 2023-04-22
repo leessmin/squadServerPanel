@@ -5,6 +5,7 @@ import { apiType } from "../type/api/api";
 import { Ref, ref } from "vue";
 import router from "../router";
 import { message } from "ant-design-vue";
+import { dealFormData } from "../util/store/formData";
 
 // 登录相关的仓库
 export const useLoginStore = defineStore("login", () => {
@@ -31,11 +32,12 @@ export const useLoginStore = defineStore("login", () => {
 	// 返回number    -1 登录失败   0初次登录   1登录成功
 	async function Login(username: string, password: string, captcha_id: string, captcha_code: string): Promise<number> {
 		// 整合form-data数据
-		const formData = new FormData()
-		formData.append("username", username)
-		formData.append("password", password)
-		formData.append("captcha_id", captcha_id)
-		formData.append("captcha_code", captcha_code)
+		const formData = dealFormData({
+			username,
+			password,
+			captcha_id,
+			captcha_code
+		})
 
 		// 登录
 		const result = await http().Require<apiType<loginType>>("/auth/login", {
@@ -58,10 +60,12 @@ export const useLoginStore = defineStore("login", () => {
 	// 初始化 设置
 	async function initServer(username: string, password: string, game_serve_path: string) {
 		// 整合form-data数据
-		const formData = new FormData()
-		formData.append("username", username)
-		formData.append("password", password)
-		formData.append("game_serve_path", game_serve_path)
+		const formData = dealFormData({
+			username,
+			password,
+			game_serve_path
+		})
+
 
 		// 初始化设置
 		const result = await http().Require<apiType<any>>("/BA/first/init", {
@@ -91,10 +95,6 @@ export const useLoginStore = defineStore("login", () => {
 	async function verifyToken() {
 		// 获取token
 		let token = localStorage.getItem("token")
-
-		// 整合form-data
-		let formData = new FormData()
-		formData.append("token", (token as string))
 
 		const result = await http().Require<apiType<verifyType>>("/auth/verify", {
 			headers: {
