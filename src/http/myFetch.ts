@@ -193,3 +193,5 @@ class MyFetch {
 		return path
 	}
 }
+
+export default MyFetch

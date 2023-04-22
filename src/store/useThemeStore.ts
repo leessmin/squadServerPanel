@@ -4,6 +4,7 @@ import { light } from "../theme/light.js";
 import { dark } from "../theme/dark.js";
 import { ThemeColor, ThemeType } from '../type/theme/theme'
 
+// 主题仓库
 export const useThemeStore = defineStore('theme', () => {
     // 当前主题
     const isTheme = ref<ThemeType>('light')
