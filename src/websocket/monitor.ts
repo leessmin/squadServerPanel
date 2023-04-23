@@ -51,8 +51,8 @@ function memHandle(mem: memType): memType {
 	mem.used_percent = Number(mem.used_percent.toFixed(2))
 
 	// 换算成MB
-	mem.total = Math.round(mem.total / 1024 / 1024)
-	mem.used = Math.round(mem.used / 1024 / 1024)
+	mem.total = Math.round(bytes_mb(mem.total))
+	mem.used = Math.round(bytes_mb(mem.used))
 
 	return mem
 }
@@ -63,8 +63,8 @@ function diskHandle(disk: memType): memType {
 	disk.used_percent = Number(disk.used_percent.toFixed(2))
 
 	// 换算成GB
-	disk.total = Math.round(disk.total / 1024 / 1024 / 1024)
-	disk.used = Math.round(disk.used / 1024 / 1024 / 1024)
+	disk.total = Math.round(bytes_gb(disk.total))
+	disk.used = Math.round(bytes_gb(disk.used))
 
 	return disk
 }
@@ -86,13 +86,23 @@ function netHandle(net: netType): dealNetType {
 	}
 
 	let dn: dealNetType = {
-		now_recv: Number(((net.bytes_recv - beforeNet.bytes_recv) / 1024 / 1024).toFixed(2)),
-		now_sent: Number(((net.bytes_sent - beforeNet.bytes_sent) / 1024 / 1024).toFixed(2)),
-		bytes_recv: Number((beforeNet.bytes_recv / 1024 / 1024 / 1024).toFixed(2)),
-		bytes_sent: Number((beforeNet.bytes_sent / 1024 / 1024 / 1024).toFixed(2)),
+		now_recv: Number((bytes_mb(net.bytes_recv - beforeNet.bytes_recv)).toFixed(2)),
+		now_sent: Number((bytes_mb(net.bytes_sent - beforeNet.bytes_sent)).toFixed(2)),
+		bytes_recv: Number((bytes_gb(beforeNet.bytes_recv)).toFixed(2)),
+		bytes_sent: Number((bytes_gb(beforeNet.bytes_sent)).toFixed(2)),
 	}
 
 	beforeNet = net
 
 	return dn
+}
+
+// 从byte 到 mb
+function bytes_mb(num: number): number {
+	return num / 1024 / 1024
+}
+
+// 从byte 到 gb
+function bytes_gb(num: number): number {
+	return bytes_mb(num) / 1024
 }
