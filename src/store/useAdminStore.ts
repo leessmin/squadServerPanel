@@ -42,7 +42,6 @@ export const useAdminStore = defineStore("admin", () => {
 			body: JSON.stringify(admin),
 		})
 
-		console.log(result);
 		if (result?.code != 200) {
 			// 添加失败，刷新数据
 			getAdminGroup()
@@ -50,9 +49,25 @@ export const useAdminStore = defineStore("admin", () => {
 		}
 	}
 
+	// 删除 管理组
+	async function delAdminGroup(groupName: string) {
+
+		const result = await http().Require<apiType<{}>>(`BA/adminGroup/del?groupName=${groupName}`, {
+			method: "DELETE",
+		})
+
+		if (result?.code != 200) {
+			// 删除失败，刷新数据
+			getAdminGroup()
+			return
+		}
+
+	}
+
 	return {
 		adminGroup,
 		getAdminGroup,
-		addEditAdminGroup
+		addEditAdminGroup,
+		delAdminGroup
 	}
 })

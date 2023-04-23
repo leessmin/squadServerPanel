@@ -244,6 +244,8 @@ function onEdit(obj: AdminGroupData) {
 
 // 删除 按钮 回调
 function onDelete(obj: AdminGroupData) {
+	// 删除
+	adminStore.delAdminGroup(obj.groupName)
 	dataSource.value = dataSource.value.filter(item => item.key !== obj.key);
 }
 
