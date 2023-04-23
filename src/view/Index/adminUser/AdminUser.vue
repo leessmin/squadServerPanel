@@ -304,9 +304,6 @@ const onSelectChange = (selectedRowKeys: string[]) => {
 // 批量删除回调
 async function deleteArr() {
 	deleteSelect.loading = true;
-	// TODO: 发送请求
-
-	console.log(deleteSelect.selectedRowKeys);
 
 	// 准备删除的steamId
 	let deleteSteamIdList: string[] = []
@@ -329,7 +326,6 @@ async function deleteArr() {
 	await adminStore.delAdminUser(deleteSteamIdList)
 
 	deleteSelect.loading = false;
-
 	deleteSelect.selectedRowKeys = [];
 }
 
