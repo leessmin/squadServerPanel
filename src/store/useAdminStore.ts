@@ -35,8 +35,24 @@ export const useAdminStore = defineStore("admin", () => {
 		}
 	}
 
+	// 添加 或 编辑 管理组
+	async function addEditAdminGroup(admin: AdminGroupData) {
+		const result = await http().Require<apiType<groupType>>("BA/adminGroup/addEdit", {
+			method: "POST",
+			body: JSON.stringify(admin),
+		})
+
+		console.log(result);
+		if (result?.code != 200) {
+			// 添加失败，刷新数据
+			getAdminGroup()
+			return
+		}
+	}
+
 	return {
 		adminGroup,
-		getAdminGroup
+		getAdminGroup,
+		addEditAdminGroup
 	}
 })
