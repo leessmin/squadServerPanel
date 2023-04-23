@@ -18,9 +18,9 @@
 					</template>
 					<template v-else-if="column.dataIndex === 'auth'">
 						<span>
-							<a-tag v-for="auth in record.auth" :key="auth" :color="groupAuthMap.get(auth)!.color"
+							<a-tag v-for="auth in record.auth" :key="auth" :color="groupAuthMap.has(auth)?groupAuthMap.get(auth)!.color:'#fff'"
 								style="margin-bottom: 8px; font-size: medium;">
-								<span style="color: #fff;">
+								<span style="color: #fff;" v-if="groupAuthMap.has(auth)">
 									{{ groupAuthMap.get(auth)!.title }}
 								</span>
 							</a-tag>
@@ -45,7 +45,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { string } from 'vue-types';
 import SectionPanel from '../../../components/Section/SectionPanel.vue';
 import { AdminGroupData } from '../../../type/adminGroup/adminGroup';
 import AdminGroupAddPanel from './components/AdminGroupAddPanel.vue';
