@@ -78,14 +78,7 @@ const columns = [
 ];
 
 // 数据源
-const dataSource = ref<AdminGroupData[]>([
-	{
-		key: '0',
-		groupName: 'admin',
-		info: "管理员",
-		auth: ["forceteamchange", "canseeadminchat"],
-	},
-]);
+const dataSource = ref<AdminGroupData[]>([]);
 
 // 管理组的权限 map映射
 const groupAuthMap = new Map([
@@ -222,7 +215,7 @@ filterGroupName(dataSource.value)
 let editObj = ref<AdminGroupData>()
 
 // 数据的key Value
-let keyValue = ref<string>(String(parseInt(dataSource.value[dataSource.value.length - 1].key) + 1))
+let keyValue = ref<string>("")
 
 
 // 添加 按钮 回调
@@ -320,8 +313,10 @@ adminStore.$subscribe((mutations, state) => {
 	// 服务器返回的数据显示
 	dataSource.value = state.adminGroup as AdminGroupData[]
 
-	// 数据发送变化 key也要发送变化
-	keyValue.value = String(parseInt(dataSource.value[dataSource.value.length - 1].key) + 1)
+	// 获取key
+	let key = dataSource.value[dataSource.value.length - 1] != undefined ? dataSource.value[dataSource.value.length - 1].key + 1 : "0"
+	// 数据发送变化 key也要发生变化
+	keyValue.value = String(parseInt(key))
 })
 </script>
 
