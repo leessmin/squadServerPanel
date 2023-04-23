@@ -243,7 +243,7 @@ function addHandle() {
 	console.log("添加");
 
 	// 获取添加的数据下标
-	let index = dataSource.value[dataSource.value.length - 1].key + 1
+	let index = dataSource.value[dataSource.value.length - 1] != undefined ? dataSource.value[dataSource.value.length - 1].key + 1 : "0"
 
 	// 添加 临时 数据
 	editableData[index] = {

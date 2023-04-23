@@ -130,15 +130,13 @@ export const useAdminStore = defineStore("admin", () => {
 
 	// 添加 或 编辑 管理员
 	async function addEditAdminUser(user: AdminUserData) {
-		const result = await http().Require<apiType<userType>>("/BA/adminUser/addEdit", {
+		await http().Require<apiType<userType>>("/BA/adminUser/addEdit", {
 			method: "POST",
 			body: JSON.stringify(user)
 		})
 
-		// 判断请求是否成功，不成功则刷新数据  与服务器同步
-		if (result?.code != 200) {
-			getAdminUser()
-		}
+		// 刷新数据
+		getAdminUser()
 
 	}
 
