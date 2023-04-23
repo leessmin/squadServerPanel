@@ -55,9 +55,14 @@
 						</template>
 						<template v-else-if="column.dataIndex === 'steamId'">
 							<div>
-								<a-input v-if="editableData[record.key]"
-									v-model:value="editableData[record.key][(column.dataIndex as keyof AdminUserData)]"
-									style="margin: -5px 0" />
+								<div v-if="editableData[record.key]">
+									<a-input v-if="text.length == 0"
+										v-model:value="editableData[record.key][(column.dataIndex as keyof AdminUserData)]"
+										style="margin: -5px 0" />
+									<template v-else>
+										<div>{{ text }}</div>
+									</template>
+								</div>
 								<template v-else>
 									<div>{{ text }}</div>
 								</template>
@@ -89,7 +94,7 @@
 							</div>
 							<div class="delete" style="display: inline-block;">
 								<a-popconfirm title="你确定要删除吗" ok-text="确定" cancel-text="取消"
-									@confirm="deleteHandle(record.key)">
+									@confirm="deleteHandle(record.key, record.steamId)">
 									<a-button type="link" danger>删除</a-button>
 								</a-popconfirm>
 							</div>
@@ -115,7 +120,7 @@ const selectOptions = ref<selectType[]>([]);
 
 
 // 表格配置
-const columns = [
+const columns = ref([
 	{
 		title: 'steam昵称',
 		dataIndex: 'steamName',
@@ -143,17 +148,9 @@ const columns = [
 		width: '30%',
 		filters: [
 			{
-				text: 'admin',
-				value: 'admin',
+				text: '初始化',
+				value: '初始化',
 			},
-			{
-				text: 'root',
-				value: 'root',
-			},
-			{
-				text: 'VIP',
-				value: 'VIP',
-			}
 		],
 		// 过滤管理组 处理函数
 		onFilter: (value: string, record: AdminUserData) => record.groupName === value,
@@ -164,7 +161,22 @@ const columns = [
 		width: '20%',
 		fixed: 'right',
 	}
-];
+]);
+
+// 更新表格 filters字段
+function updateColumns(s: selectType[]) {
+
+	let res: { text: string, value: string }[] = []
+
+	s.forEach(v => {
+		res.push({
+			text: v.value,
+			value: v.value,
+		})
+	})
+
+	columns.value[2].filters = res
+}
 
 
 // 数据源
@@ -189,6 +201,8 @@ const save = (key: string) => {
 
 		return
 	}
+	;
+	adminStore.addEditAdminUser(temp)
 
 	Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
 	delete editableData[key];
@@ -216,7 +230,9 @@ const cancel = (key: string) => {
 };
 
 // 删除
-const deleteHandle = (key: string) => {
+const deleteHandle = (key: string, steamId: string) => {
+	adminStore.delAdminUser([steamId])
+
 	dataSource.value = dataSource.value.filter((value) => {
 		return value.key !== key
 	})
@@ -286,24 +302,35 @@ const onSelectChange = (selectedRowKeys: string[]) => {
 };
 
 // 批量删除回调
-function deleteArr() {
+async function deleteArr() {
 	deleteSelect.loading = true;
 	// TODO: 发送请求
 
 	console.log(deleteSelect.selectedRowKeys);
 
-	setTimeout(() => {
-		deleteSelect.loading = false;
+	// 准备删除的steamId
+	let deleteSteamIdList: string[] = []
 
-		// 删除
-		for (let i = 0; i < deleteSelect.selectedRowKeys.length; i++) {
-			dataSource.value = dataSource.value.filter((value) => {
-				return deleteSelect.selectedRowKeys[i] !== value.key
-			})
-		}
+	// 删除
+	for (let i = 0; i < deleteSelect.selectedRowKeys.length; i++) {
+		dataSource.value = dataSource.value.filter((value) => {
+			// 判断是否为要删除的id
+			if (value.key == deleteSelect.selectedRowKeys[i]) {
+				// 记录要删除的steamId
+				deleteSteamIdList.push(value.steamId)
+			}
 
-		deleteSelect.selectedRowKeys = [];
-	}, 1000);
+			return deleteSelect.selectedRowKeys[i] !== value.key
+		})
+	}
+
+
+	// 删除
+	await adminStore.delAdminUser(deleteSteamIdList)
+
+	deleteSelect.loading = false;
+
+	deleteSelect.selectedRowKeys = [];
 }
 
 
@@ -317,6 +344,7 @@ adminStore.getAdminUser()
 adminStore.$subscribe((mutations, state) => {
 	dataSource.value = state.adminUser
 	selectOptions.value = adminStore.groupNameList
+	updateColumns(selectOptions.value)
 })
 
 

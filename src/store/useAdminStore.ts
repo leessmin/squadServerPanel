@@ -1,12 +1,13 @@
 import { defineStore } from "pinia";
 import http from "../http/http";
 import { apiType } from "../type/api/api";
-import { adminGroupType, adminUserType, groupType } from "../type/api/admin";
+import { adminGroupType, adminUserType, groupType, userType } from "../type/api/admin";
 import addKey from "../util/worker/addKey?worker"
 import { computed, ref } from "vue";
 import { AdminGroupData } from "../type/adminGroup/adminGroup";
 import MyWorker from "../util/worker/worker";
 import { AdminUserData, selectType } from "../type/adminUser/adminUser";
+import { dealQuery } from "../util/store/queryData";
 
 
 
@@ -127,6 +128,33 @@ export const useAdminStore = defineStore("admin", () => {
 		w.sendMsg(result.data.adminUser)
 	}
 
+	// 添加 或 编辑 管理员
+	async function addEditAdminUser(user: AdminUserData) {
+		const result = await http().Require<apiType<userType>>("/BA/adminUser/addEdit", {
+			method: "POST",
+			body: JSON.stringify(user)
+		})
+
+		// 判断请求是否成功，不成功则刷新数据  与服务器同步
+		if (result?.code != 200) {
+			getAdminUser()
+		}
+
+	}
+
+	// 删除管理员
+	async function delAdminUser(user: string[]) {
+		let query = dealQuery("steamIds", user)
+
+		const result = await http().Require<apiType<{}>>(`/BA/adminUser/del?${query}`, {
+			method: "DELETE",
+		})
+
+		if (result?.code != 200) {
+			getAdminUser()
+		}
+	}
+
 	// 获取steam name
 	function getSteam(obj: AdminUserData[]) {
 
@@ -137,6 +165,7 @@ export const useAdminStore = defineStore("admin", () => {
 
 			// 判断是否存在用户 ，如果没有则退出这次循环
 			if (result?.data.players.response.players.length == 0) {
+				v.steamName = ""
 				return
 			}
 
@@ -154,5 +183,7 @@ export const useAdminStore = defineStore("admin", () => {
 		adminUser,
 		groupNameList,
 		getAdminUser,
+		addEditAdminUser,
+		delAdminUser,
 	}
 })
