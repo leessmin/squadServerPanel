@@ -2,10 +2,10 @@ import { defineStore } from "pinia";
 import http from "../http/http";
 import { apiType } from "../type/api/api";
 import { adminGroupType, groupType } from "../type/api/admin";
-import worker from "../util/worker/worker?worker"
+import addKey from "../util/worker/addKey?worker"
 import { ref } from "vue";
 import { AdminGroupData } from "../type/adminGroup/adminGroup";
-import { functions } from "lodash-es";
+import MyWorker from "../util/worker/worker";
 
 // 管理组  管理员 的仓库
 export const useAdminStore = defineStore("admin", () => {
@@ -22,17 +22,17 @@ export const useAdminStore = defineStore("admin", () => {
 			return
 		}
 
-		// 创建worker 线程
-		const w = new worker()
+		// 创建 添加 key的 worker 线程
+		const ak = new addKey()
 
-		// 发送要处理的结果
-		w.postMessage(result.data.adminGroup)
-
-		// 得到结果
-		w.onmessage = function (e) {
+		// 执行对象
+		const w = new MyWorker<AdminGroupData[]>(ak, (e) => {
 			// 将结果赋值
 			adminGroup.value = e.data
-		}
+		})
+
+		// 发送消息 给worker
+		w.sendMsg(result.data.adminGroup)
 	}
 
 	// 添加 或 编辑 管理组

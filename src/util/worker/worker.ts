@@ -1,19 +1,30 @@
-//  worker 往对象 添加key
+// web worker 封装
+
+export default class MyWorker<T> {
+	private worker: Worker
+
+	constructor(w: Worker, fn: (e: MessageEvent<T>) => void) {
+		this.worker = w
+
+		// 监听 work发送的信息
+		this.worker.onmessage = (e: MessageEvent<T>) => {
+
+			fn(e)
+
+			// 得到消息，销毁worker
+			this.destroy()
+		}
+	}
+
+	// 发送消息给worker
+	sendMsg(msg: any) {
+		this.worker.postMessage(msg)
+	}
+
+	// 销毁 worker
+	private destroy() {
+		this.worker.terminate()
+	}
 
 
-// 监听消息
-self.onmessage = function (e) {
-	// 运行函数 将处理的好的结果返回
-
-	let result = e.data
-
-	let i = 0
-	result.forEach((e: any) => {
-		e.key = `${i}`
-
-		i++
-	});
-
-	// 将处理好的信息返回
-	self.postMessage(result)
 }
