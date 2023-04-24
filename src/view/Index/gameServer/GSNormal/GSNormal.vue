@@ -255,9 +255,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, createVNode } from 'vue';
 import { ServerConfigType } from '../../../../type/gameServer/gameServer';
 import { useSquadServerStore } from '../../../../store/useSquadServerStore';
+import { onBeforeRouteLeave } from 'vue-router';
+import { Modal } from 'ant-design-vue';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 
 // a-form-item label 的宽度
 const labelCol = { style: { width: '280px' } };
@@ -344,8 +347,37 @@ squadStore.getSquadConfig()
 // 订阅仓库
 squadStore.$subscribe((mutation, state) => {
 	ServerConfig.value = state.squadConfig == undefined ? ServerConfig.value : JSON.parse(JSON.stringify(state.squadConfig))
-
 })
+
+
+
+// 路由守卫  离开当前页面时判断是否存在数据修改未保存
+onBeforeRouteLeave((to, from, next) => {
+	// 判断配置是否修改
+	if (!isCfgChange()) {
+		// 配置没有被修改
+		next()
+		return
+	}
+
+
+	Modal.confirm({
+		content: '你还没有保存配置呢，你确定要退出吗',
+		icon: createVNode(ExclamationCircleOutlined),
+		onOk() {
+			next()
+		},
+		cancelText: '取消',
+		onCancel() {
+			Modal.destroyAll();
+		},
+	});
+})
+
+// 判断配置是否修改  true 修改
+function isCfgChange(): boolean {
+	return !(JSON.stringify(ServerConfig.value) == JSON.stringify(squadStore.squadConfig))
+}
 </script>
 
 <style scoped lang="less">
