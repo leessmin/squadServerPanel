@@ -7,7 +7,7 @@ import { createVNode } from "vue";
 export function abortAlert(): Promise<boolean> {
 	return new Promise<boolean>((resolve, reject) => {
 		Modal.confirm({
-			content: '你还没有保存配置呢，你确定要退出吗',
+			content: '你还没有保存呢，你确定要离开吗',
 			icon: createVNode(ExclamationCircleOutlined),
 			onOk() {
 				resolve(true)

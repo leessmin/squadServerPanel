@@ -43,6 +43,7 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 	}
 
 
+
 	// 地图
 	const squadMap = ref<SquadMapType>()
 
@@ -75,9 +76,38 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 		}
 
 
-		console.log(result);
+		message.success("保存成功")
+	}
 
 
+
+	// 每日消息
+	const dayMsg = ref<string>("")
+
+	// 获取 每日消息
+	async function getSquadDayMessage() {
+
+		let result = await http().Require<apiType<{ dayMsg: string }>>(`/BA/dayMsg/get`, {})
+
+		if (result?.code != 200) {
+			return
+		}
+
+		// 随便赋值 防止dom结构不更新
+		dayMsg.value = ""
+
+		dayMsg.value = result.data.dayMsg
+	}
+
+	// 保存 每日消息
+	async function saveSquadDayMessage(str: string) {
+		let result = await http().Require<apiType<{ dayMsg: string }>>(`/BA/dayMsg/edit`, {
+			method: "POST",
+			body: str
+		})
+
+		message.success("保存成功")
+		dayMsg.value = result?.data.dayMsg as string
 
 	}
 
@@ -88,5 +118,8 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 		getSquadMap,
 		squadMap,
 		saveSquadMap,
+		getSquadDayMessage,
+		dayMsg,
+		saveSquadDayMessage
 	}
 })

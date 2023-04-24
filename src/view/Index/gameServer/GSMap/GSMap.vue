@@ -71,8 +71,6 @@ SquadStore.getSquadMap(current.value[0])
 SquadStore.$subscribe((mutation, state) => {
 	mapArr.value.set('selected', state.squadMap?.mapSelected as string[])
 	mapArr.value.set('select', state.squadMap?.mapSelect as string[])
-	console.log(state.squadMap);
-
 })
 </script>
 
