@@ -77,7 +77,7 @@
 							<span>上行</span>
 						</div>
 						<div class="bottom">
-							<span>{{ flowMonitorInfo.uploadSeed }}Mbps</span>
+							<span>{{ flowMonitorInfo.uploadSeed }}Mb</span>
 						</div>
 					</li>
 					<li>
@@ -86,7 +86,7 @@
 							<span>下行</span>
 						</div>
 						<div class="bottom">
-							<span>{{ flowMonitorInfo.downloadSpeed }}Mbps</span>
+							<span>{{ flowMonitorInfo.downloadSpeed }}Mb</span>
 						</div>
 					</li>
 					<li>

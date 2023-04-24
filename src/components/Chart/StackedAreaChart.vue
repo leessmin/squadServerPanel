@@ -64,7 +64,7 @@ let optionDefault: echarts.EChartOption = {
 	yAxis: [
 		{
 			type: 'value',
-			name: "单位Mbps",
+			name: "单位Mb",
 			nameTextStyle: {
 				color: themeStore.themeColor.get('--text-color')
 			},
