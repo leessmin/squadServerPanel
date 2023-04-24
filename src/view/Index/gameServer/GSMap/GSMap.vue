@@ -57,9 +57,7 @@ watch(current, (newVal, oldVal) => {
 
 // 保存地图选项
 const saveMapHandle = (data: string[]) => {
-	// TODO： 通过data发送请求
-	console.log(data);
-
+	// 发送请求
 	SquadStore.saveSquadMap(current.value[0], data)
 }
 

@@ -28,7 +28,6 @@
 <script setup lang="ts">
 import { Ref, ref, watch, nextTick } from 'vue';
 import getUlMapValue from '../../../../../util/gameServer/GSMap/getUlMapValue';
-import randomRGBColor from '../../../../../util/gameServer/GSMap/randomRGBColor';
 import { onBeforeRouteLeave } from 'vue-router';
 import { abortAlert } from '../../../../../util/alert/alert';
 
