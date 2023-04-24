@@ -5,6 +5,7 @@ import { squadServerType } from "../type/api/squadConfig";
 import { ref } from "vue";
 import { ServerConfigType } from "../type/gameServer/gameServer";
 import { message } from "ant-design-vue";
+import { SquadMapType } from "../type/api/squadMap";
 
 // squad 服务器设置相关
 export const useSquadServerStore = defineStore("squadServer", () => {
@@ -41,9 +42,51 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 
 	}
 
+
+	// 地图
+	const squadMap = ref<SquadMapType>()
+
+	// 获取 地图
+	async function getSquadMap(mapType: string) {
+		let result = await http().Require<apiType<SquadMapType>>(`/BA/map/get?mapType=${mapType}`, {})
+
+		if (result?.code != 200) {
+			return
+		}
+
+		squadMap.value = result.data
+	}
+
+	// 编辑地图类型
+	async function saveSquadMap(mapType: string, mapList: string[]) {
+		// 整理数据
+		let obj = {
+			mapType,
+			mapList
+		}
+
+		let result = await http().Require<apiType<{ mapList: string[] }>>(`/BA/map/edit`, {
+			method: "POST",
+			body: JSON.stringify(obj)
+		})
+
+		if (result?.code != 200) {
+			getSquadMap(mapType)
+		}
+
+
+		console.log(result);
+
+
+
+	}
+
 	return {
 		squadConfig,
 		getSquadConfig,
 		saveSquadConfig,
+		getSquadMap,
+		squadMap,
+		saveSquadMap,
 	}
 })
