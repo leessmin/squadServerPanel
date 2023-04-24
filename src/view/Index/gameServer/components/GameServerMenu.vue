@@ -61,18 +61,21 @@ themeStore.$subscribe((mutation, state) => {
 const selectedKeys = ref([route.name])
 
 // 菜单选择改变 回调
-function selectHandle(args: { item: string, key: string, selectedKeys: string }) {
-    console.log(args.key);
-    router.push({
+async function selectHandle(args: { item: string, key: string, selectedKeys: string }) {
+
+    await router.push({
         name: args.key
     })
+
+	// 二次确认是否跳转的是当前路由
+	selectedKeys.value[0] = route.name
 }
 
 
 
 // 监听路由
 watch(route, (value) => {
-    console.log(value);
+
     selectedKeys.value = [value.name]
 })
 </script>
