@@ -145,6 +145,39 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 
 	}
 
+
+
+	// 许可证
+	const License = ref<string>("")
+
+	// 获取许可证
+	async function getLicense() {
+
+		let result = await http().Require<apiType<{ license: string }>>(`/BA/license/get`, {})
+
+		if (result?.code != 200) {
+			return
+		}
+
+
+		// 随便赋值 防止dom结构不更新
+		License.value = ""
+
+		License.value = result.data.license
+	}
+
+	// 保存 许可证
+	async function saveLicense(str: string) {
+		let result = await http().Require<apiType<{ license: string }>>(`/BA/license/edit`, {
+			method: "POST",
+			body: str
+		})
+
+		message.success("保存成功")
+		License.value = result?.data.license as string
+
+	}
+
 	return {
 		squadConfig,
 		getSquadConfig,
@@ -157,6 +190,9 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 		saveSquadDayMessage,
 		getSquadMsg,
 		serverMsg,
-		saveSquadMsg
+		saveSquadMsg,
+		License,
+		getLicense,
+		saveLicense,
 	}
 })
