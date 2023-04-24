@@ -111,6 +111,40 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 
 	}
 
+
+
+	// 循环公告
+	const serverMsg = ref<string[]>([])
+
+	// 获取循环公告
+	async function getSquadMsg() {
+		let result = await http().Require<apiType<{ serverMsg: string[] }>>(`/BA/serverMsg/get`, {})
+
+		if (result?.code != 200) {
+			return
+		}
+
+		serverMsg.value = result.data.serverMsg
+	}
+
+	// 保存 循环公告
+	async function saveSquadMsg(MsgArr: string[]) {
+		let result = await http().Require<apiType<{ serverMsg: string[] }>>(`/BA/serverMsg/edit`, {
+			method: "POST",
+			body: JSON.stringify({
+				serverMsg: MsgArr
+			})
+		})
+
+		if (result?.code != 200) {
+			getSquadMsg()
+		}
+
+		message.success("保存成功")
+		serverMsg.value = result?.data.serverMsg as string[]
+
+	}
+
 	return {
 		squadConfig,
 		getSquadConfig,
@@ -120,6 +154,9 @@ export const useSquadServerStore = defineStore("squadServer", () => {
 		saveSquadMap,
 		getSquadDayMessage,
 		dayMsg,
-		saveSquadDayMessage
+		saveSquadDayMessage,
+		getSquadMsg,
+		serverMsg,
+		saveSquadMsg
 	}
 })
