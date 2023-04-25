@@ -1,13 +1,13 @@
 // 底层路径
-const base = "/api"
+// @ts-ignore
+const base = `${serverUrl}/api`
 
 // 底层url
-// export const baseUrl = `http://${base}`
-export const baseUrl = `${base}`
+export const baseUrl = `http://${base}`
+
 
 // ws
-// export const wsUrl = `ws://${base}`
-export const wsUrl = `${base}`
+export const wsUrl = `ws://${base}`
 
 // 超时时间
 export const timeOut = 8000

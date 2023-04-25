@@ -1,5 +1,5 @@
 import { message } from 'ant-design-vue'
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: readonly RouteRecordRaw[] = [
 	{
@@ -136,7 +136,7 @@ const routes: readonly RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes
 })
 
