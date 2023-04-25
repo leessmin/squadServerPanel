@@ -5,6 +5,7 @@ import { settingConfigType, settingType } from "../type/api/setting";
 import { ref } from "vue";
 import { message } from "ant-design-vue";
 import { dealFormData } from "../util/store/formData";
+import { exitPanel } from "../util/exitPanel/exitPanel";
 
 // 面板的设置
 export const useSettingStore = defineStore("setting", () => {
@@ -61,11 +62,9 @@ export const useSettingStore = defineStore("setting", () => {
 			return
 		}
 
-		// 清空localStorage
-		localStorage.clear()
 
-		// 修改密码成功 刷新页面  重新登录，因为token失效了
-		location.reload()
+		// 退出登录
+		exitPanel()
 	}
 
 	return {

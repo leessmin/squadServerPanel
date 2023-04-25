@@ -77,6 +77,7 @@
 import { reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useThemeStore } from '../../../store/useThemeStore';
+import { exitPanel } from '../../../util/exitPanel/exitPanel';
 
 
 // 实例化路由
@@ -104,6 +105,14 @@ const menuState = reactive({
 
 // 菜单选择改变 回调
 function selectHandle(args: { item: string, key: string, selectedKeys: string }) {
+
+	// 判断key是否为 exit
+	if (args.key == "exit") {
+		// 退出登录
+		exitPanel()
+		return
+	}
+
 	console.log(args.key)
 	// 跳转至对应的页面
 	router.push({
