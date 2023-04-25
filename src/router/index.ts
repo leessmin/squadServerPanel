@@ -89,12 +89,13 @@ const routes: readonly RouteRecordRaw[] = [
 					}
 				]
 			},
+			/* TODO: 监控 暂时未完成的功能
 			{
 				// 监控
 				path: "monitor",
 				name: "monitor",
 				component: () => import("../view/Index/monitor/Monitor.vue")
-			},
+			}, */
 			{
 				// 日志
 				path: "log",
